@@ -36,7 +36,8 @@ Route::get("home",[HomeController::class,'index']);
 Route::get('/', [WellcomeController::class, 'index']);
 
 //AUTH *************************************************************************************
-Route::get('login', [GuestController::class, 'login']);
+Route::get('login/', [GuestController::class, 'login']);
+Route::get('login/:type', [GuestController::class, 'login']);
 Route::post('login', [AuthController::class, 'login']);
 
 Route::get('register', [GuestController::class, 'register']);

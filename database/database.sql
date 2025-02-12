@@ -154,14 +154,14 @@ CREATE TABLE IF NOT EXISTS `sessions` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `sessions_user_id_index` (`users_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto_gimnasio.sessions: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto_gimnasio.sessions: ~5 rows (aproximadamente)
 INSERT INTO `sessions` (`id`, `users_id`, `ip_address`, `user_agent`, `user_client`, `user_os`, `rowquid`, `created_at`, `updated_at`) VALUES
 	(1, 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36 Edg/133.0.0.0', '{"type":"browser","name":"Microsoft Edge","short_name":"PS","version":"133.0","engine":"Blink","engine_version":"133.0.0.0","family":"Internet Explorer"}', '{"name":"Windows","short_name":"WIN","version":"10","platform":"x64","family":"Windows"}', 'NCPdPzOCsh85vr2w', '2025-02-12 20:07:58', '2025-02-12 20:08:25'),
 	(2, 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36 Edg/133.0.0.0', '{"type":"browser","name":"Microsoft Edge","short_name":"PS","version":"133.0","engine":"Blink","engine_version":"133.0.0.0","family":"Internet Explorer"}', '{"name":"Windows","short_name":"WIN","version":"10","platform":"x64","family":"Windows"}', 'mBTGDtr2lkpZT4NW', '2025-02-12 20:08:48', '2025-02-12 20:08:55'),
 	(3, 3, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36 Edg/133.0.0.0', '{"type":"browser","name":"Microsoft Edge","short_name":"PS","version":"133.0","engine":"Blink","engine_version":"133.0.0.0","family":"Internet Explorer"}', '{"name":"Windows","short_name":"WIN","version":"10","platform":"x64","family":"Windows"}', 'MjcVvBXUIKx8kVTk', '2025-02-12 20:09:35', '2025-02-12 20:09:43'),
-	(4, 3, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36 Edg/133.0.0.0', '{"type":"browser","name":"Microsoft Edge","short_name":"PS","version":"133.0","engine":"Blink","engine_version":"133.0.0.0","family":"Internet Explorer"}', '{"name":"Windows","short_name":"WIN","version":"10","platform":"x64","family":"Windows"}', 'ozEtGgSnDBmuEBwV', '2025-02-12 20:10:46', NULL);
+	(4, 3, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36 Edg/133.0.0.0', '{"type":"browser","name":"Microsoft Edge","short_name":"PS","version":"133.0","engine":"Blink","engine_version":"133.0.0.0","family":"Internet Explorer"}', '{"name":"Windows","short_name":"WIN","version":"10","platform":"x64","family":"Windows"}', 'ozEtGgSnDBmuEBwV', '2025-02-12 20:10:46', '2025-02-12 20:17:51');
 
 -- Volcando estructura para tabla proyecto_gimnasio.users
 CREATE TABLE IF NOT EXISTS `users` (
@@ -183,12 +183,12 @@ CREATE TABLE IF NOT EXISTS `users` (
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Volcando datos para la tabla proyecto_gimnasio.users: ~3 rows (aproximadamente)
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `two_factor_secret`, `two_factor_recovery_codes`, `two_factor_confirmed_at`, `remember_token`, `current_team_id`, `profile_photo_path`, `role`, `rowquid`, `created_at`, `updated_at`, `deleted_at`) VALUES
 	(1, 'antonny maluenga', 'gabrielmalu15@gmail.com', '2025-02-12 20:09:49', '$2y$10$w.RmHcokqKdecofe7CK2uOqMeLPDw2hseQJ99AgvSbFeCmigvQWL.', 'RVwcaTVzyTHGWDDayOEdSQiyxQrECZWt', NULL, '2025-02-12 20:07:58', NULL, NULL, NULL, 100, 'h3mcZyXrlIg2fMVi', '2025-02-12 20:07:57', '2025-02-12 20:07:58', NULL),
-	(2, 'Yonathan Castillo', 'leothan522@mail.com', '2025-02-12 20:09:52', '$2y$10$VsONPinbnXgupIlYjYEwSeO03nSEFxrkn8lccREw1H4VDY894/8dS', 'XkvnEeOtEadxopVEpOlfKqDfmqbdrePN', NULL, '2025-02-12 20:08:48', NULL, NULL, NULL, 100, 'sCLssIyTZzCC7gHA', '2025-02-12 20:08:48', '2025-02-12 20:08:48', NULL),
+	(2, 'Yonathan Castillo', 'leothan522@gmail.com', '2025-02-12 20:09:52', '$2y$10$VsONPinbnXgupIlYjYEwSeO03nSEFxrkn8lccREw1H4VDY894/8dS', 'XkvnEeOtEadxopVEpOlfKqDfmqbdrePN', NULL, '2025-02-12 20:08:48', NULL, NULL, NULL, 100, 'sCLssIyTZzCC7gHA', '2025-02-12 20:08:48', '2025-02-12 20:08:48', NULL),
 	(3, 'Administrador', 'admin@gym.com', '2025-02-12 20:09:56', '$2y$10$XqiID9zEtMNwMDv5ZSEcJ.Ur6lBOk0.fiM1CQ.FrHU/jcMwyOpSsm', 'KTGLOZNwEtUyecfRcsMFRFewQqYFqgth', NULL, '2025-02-12 20:09:35', NULL, NULL, NULL, 1, '1bNV0w0fsj1K3qyy', '2025-02-12 20:09:35', '2025-02-12 20:09:35', NULL);
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;

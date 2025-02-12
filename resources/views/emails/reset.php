@@ -25,7 +25,7 @@
                                 <table border="0" cellspacing="0" cellpadding="0" align="left" width="100%" style="box-sizing:border-box;border-spacing:0;border-collapse:collapse;font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;!important">
                                     <tbody><tr style="box-sizing:border-box;font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;!important">
                                         <td style="box-sizing:border-box;text-align:center!important;font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;!important;padding:0" align="center">
-                                            <img src="https://i.ibb.co/LJtwzzs/alguarisa-logo-original-transparete.png" width="250" alt="alguarisa-logo-original-transparete" border="0"><h2 style="box-sizing:border-box;margin-top:8px!important;margin-bottom:0;font-size:24px;font-weight:400!important;line-height:1.25!important;font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;!important">
+                                            <img src="https://alguarisa.com/transporte/public/img/logo_gym.png" width="250" alt="alguarisa-logo-original-transparete" border="0"><h2 style="box-sizing:border-box;margin-top:8px!important;margin-bottom:0;font-size:24px;font-weight:400!important;line-height:1.25!important;font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;!important">
                                                 ¿Olvidó su Contraseña?
 
                                             </h2>
@@ -152,7 +152,7 @@
                                     </tbody>
                                 </table>
 
-                                <p style="box-sizing:border-box;margin-top:0;margin-bottom:10px;color:#6a737d!important;font-size:14px!important;font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;!important">  Para cualquier consulta o asistencia adicional, no dude ponerse en contacto con el Departamento de Tecnología y Sistemas de ALGUARISA.
+                                <!--<p style="box-sizing:border-box;margin-top:0;margin-bottom:10px;color:#6a737d!important;font-size:14px!important;font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;!important">  Para cualquier consulta o asistencia adicional, no dude ponerse en contacto con el Departamento de Tecnología y Sistemas de ALGUARISA.-->
                             </td>
                         </tr>
                         </tbody></table>
@@ -167,7 +167,7 @@
                                     </tbody>
                                 </table>
 
-                                <p style="box-sizing:border-box;margin-top:0;margin-bottom:10px;color:#6a737d!important;font-size:12px!important;font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;!important">Alimentos de Guárico S.A</p>
+                                <p style="box-sizing:border-box;margin-top:0;margin-bottom:10px;color:#6a737d!important;font-size:12px!important;font-family:-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,Helvetica,Arial,sans-serif,&quot;Apple Color Emoji&quot;,&quot;Segoe UI Emoji&quot;!important">Gimnasio Copa Cabana Gym</p>
                             </td>
                         </tr>
                         </tbody>

@@ -107,9 +107,11 @@
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="d-flex gap-2 gap-md-4 flex-column flex-md-row justify-content-md-center mt-5">
-                                                <a href="<?= route('register') ?>" class="link-secondary text-decoration-none">
-                                                    Registrarse
-                                                </a>
+                                                <?php if (isset($type) && $type == "miembros"){ ?>
+                                                    <a href="<?= route('register') ?>" class="link-secondary text-decoration-none">
+                                                        Registrarse
+                                                    </a>
+                                                <?php } ?>
                                                 <a href="<?= route('forgot/password') ?>" class="link-secondary text-decoration-none">
                                                     ¿Olvidó su contraseña?
                                                 </a>

@@ -13,9 +13,9 @@ class GuestController extends Controller
         Middleware::guest('/');
     }
 
-    public function login()
+    public function login($type = "miembros")
     {
-        return $this->view('auth.login');
+        return $this->view('auth.login', ['type' => $type]);
 
     }
 
