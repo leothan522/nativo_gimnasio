@@ -44,7 +44,10 @@
             </tr>
             </thead>
             <tbody id="tbody_card_table">
-                <?php foreach ($listarRegistros as $row){ ?>
+                <?php
+                    if (!empty($listarRegistros)){
+                    foreach ($listarRegistros as $row){
+                ?>
                     <tr class="align-middle">
                         <td class="text-uppercase"><?= $row->id ?></td>
                         <td class="text-uppercase text-truncate" style="max-width: 150px"><?= $row->nombre ?></td>
@@ -60,6 +63,13 @@
                             </div>
                         </td>
                     </tr>
+                <?php
+                        }
+                    }else{
+                ?>
+                        <tr class="align-middle">
+                            <td colspan="3" class="text-uppercase">Sin registros guardados.</td>
+                        </tr>
                 <?php } ?>
             </tbody>
         </table>
