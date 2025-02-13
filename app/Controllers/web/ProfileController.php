@@ -26,7 +26,7 @@ class ProfileController extends Controller
     {
         try {
             $rules = [
-                'email'       => ['required', 'valid_email', 'unique' => !Rule::unique('users', 'email')],
+                'email'       => 'required'|'valid_email',
                 'name'    => 'required|valid_name|max_len,50|min_len,3',
                 'password'    => 'required|max_len,50|min_len,8'
             ];
@@ -60,30 +60,38 @@ class ProfileController extends Controller
             $model = new User();
             $row = [];
 
-            $user = $model->where('email', $this->VALID_DATA['email'])->first();
+            $user = $model->where('rowquid', $this->VALID_DATA['rowquid'])->first();
+            $id = $user->id;
 
             $db_password = $user->password;
             $cambios = false;
-            $db_nombre = $user->nombre;
+            $db_nombre = $user->name;
             $db_email = $user->email;
             if (password_verify($this->VALID_DATA['password'], $db_password)){
 
                 if ($this->VALID_DATA['name'] != $db_nombre){
                     $cambios = true;
-                    $model->update($user, ['nombre' => $this->VALID_DATA['name']]);
+                    $model->update($id, ['name' => $this->VALID_DATA['name']]);
                 }
 
                 if ($this->VALID_DATA['email'] != $db_email){
                     $cambios = true;
-                    $model->update($user, ['email' => $this->VALID_DATA['email']]);
+                    $model->update($id, ['email' => $this->VALID_DATA['email']]);
                 }
 
                 if ($cambios){
                     $row = crearResponse(
                         'Datos Actualizados',
                         'Se ha actualizado los datos de su cuenta.',
-                        'true',
-                        'sussces'
+                        true,
+                        'success'
+                    );
+                }else{
+                    $row = crearResponse(
+                        'No se realizó ningún cambio.',
+                        'Sin Cambios.',
+                        false,
+                        'info'
                     );
                 }
 

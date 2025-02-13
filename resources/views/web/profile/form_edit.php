@@ -27,6 +27,7 @@
                             <div class="invalid-feedback" id="error_profile_input_email">Correo requerido.</div>
                         </div>
                     </div>
+                    <input type="hidden" name="rowquid" value="<?= \app\Providers\Auth::user()->rowquid ?>">
 
 
                     <button class="btn btn-primary" type="submit">Guardar Cambios</button>
