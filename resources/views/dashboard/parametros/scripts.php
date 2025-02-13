@@ -6,6 +6,11 @@
     const input_opcion = document.querySelector('#input_opcion');
 
 
+    const input_nombre = document.querySelector('#input_nombre');
+    const input_tabla_id = document.querySelector('#input_tabla_id');
+    const input_valor = document.querySelector('#input_valor');
+
+
 
     function btnVerMas(refresh = "false") {
         verCargando('content_table');
