@@ -112,6 +112,55 @@ class ParametrosController extends Controller
 
     }
 
+    function update()
+    {
+        try {
+
+            $id = 0;
+            $rowquid = $_POST['rowquid'] ?? 'NULL';
+            $model = new Parametro();
+            $existe = $model->where('rowquid', $rowquid)->first();
+            if ($existe){
+                $id = $existe->id;
+            }
+
+            $rules = [
+                //"nombre" => "required|alpha_numeric_dash",
+                "nombre" => ['required', 'alpha_numeric_dash', 'unique' => Rule::unique('parametros', 'nombre', $id)],
+                "tabla_id" => "required|integer",
+                "valor" => "required"
+            ];
+
+            $messages = [
+                "nombre" => ["alpha_numeric_dash" => "alpha_numeric_dash"]
+            ];
+
+            $filter = [
+                "nombre" => "trim|sanitize_string|lower_case",
+                "valor" => "trim|sanitize_string"
+            ];
+
+            $this->validate($rules, $messages, $filter);
+
+            $data   = $this->VALID_DATA;
+            $rowquid = $data['rowquid'];
+            unset($data['rowquid']);
+
+            if ($existe){
+                $row = $model->update($existe->id, $data);
+                $row->ok = true;
+            }else{
+                $row = crearResponse('Token de seguridad vencido por favor actualice.', null,);
+            }
+
+            return $this->json($row);
+
+        }catch (\Error|\Exception $e){
+            $this->showError('Error en el Controller', $e);
+        }
+
+    }
+
     public function show()
     {
         try {

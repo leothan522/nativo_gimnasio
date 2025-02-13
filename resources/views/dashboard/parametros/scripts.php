@@ -34,6 +34,9 @@
         const nombre = document.querySelector('#show_nombre');
         const tabla_id = document.querySelector('#show_tabla_id');
         const valor = document.querySelector('#show_valor');
+        input_nombre.value = data.nombre;
+        input_tabla_id.value = data.tabla_id;
+        input_valor.value = data.valor;
         nombre.textContent = data.nombre;
         tabla_id.textContent = data.tabla_id;
         valor.textContent = data.valor;
@@ -69,6 +72,13 @@
     function create() {
         input_opcion.value = "create";
         resetForm();
+        card_show.classList.add('d-none');
+        card_form.classList.remove('d-none');
+    }
+
+    function edit() {
+        let rowquid = input_rowquid.value;
+        input_opcion.value = "editar";
         card_show.classList.add('d-none');
         card_form.classList.remove('d-none');
     }

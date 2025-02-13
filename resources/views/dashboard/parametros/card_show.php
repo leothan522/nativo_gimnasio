@@ -27,7 +27,7 @@
             <i class="fa-regular fa-trash-can"></i> Borrar
         </button>
 
-        <button type="button" class="btn btn-primary btn-sm">
+        <button type="button" class="btn btn-primary btn-sm" onclick="edit()">
             <i class="fa-solid fa-pen-to-square"></i> Editar
         </button>
 
