@@ -68,7 +68,7 @@ Route::post('test', [TestController::class, 'testGUMP']);
 Route::get('parametros', [ParametrosController::class, 'index']);
 Route::post('parametros/limit', [ParametrosController::class, 'limit']);
 Route::post('parametros/refresh', [ParametrosController::class, 'refresh']);
-Route::post('parametros', [ParametrosController::class, 'store']);
+Route::post('parametros', [ParametrosController::class, 'save']);
 Route::post('parametros/show', [ParametrosController::class, 'show']);
 Route::post('parametros/destroy', [ParametrosController::class, 'destroy']);
 

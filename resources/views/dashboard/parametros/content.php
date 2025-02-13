@@ -9,11 +9,14 @@
         <?php
         if (isset($lastRegistro) && $lastRegistro){
             $rowquid =  $lastRegistro->rowquid;
+            $opcion = "editar";
         }else{
-            $rowquid = "NULL";
+            $rowquid = "";
+            $opcion = "create";
         }
         ?>
         <input type="text" value="<?= $rowquid ?>" id="input_rowquid">
+        <input type="text" value="<?= $opcion ?>" id="input_opcion">
 
     </div>
 </div>

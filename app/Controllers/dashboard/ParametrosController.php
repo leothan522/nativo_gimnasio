@@ -67,7 +67,7 @@ class ParametrosController extends Controller
         }
     }
 
-    function store()
+    function save()
     {
         try {
 

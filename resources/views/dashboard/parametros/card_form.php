@@ -5,7 +5,7 @@
         </h3>
         <div class="card-tools">
 
-            <button type="button" class="btn btn-tool">
+            <button type="button" class="btn btn-tool" onclick="refreshShow()">
                 <i class="fa-solid fa-ban"></i> Cancelar
             </button>
 

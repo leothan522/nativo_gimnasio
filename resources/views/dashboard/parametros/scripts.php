@@ -3,6 +3,7 @@
     const card_show = document.querySelector("#div_card_show");
     const card_form = document.querySelector("#div_card_form");
     const input_rowquid = document.querySelector('#input_rowquid');
+    const input_opcion = document.querySelector('#input_opcion');
 
 
 
@@ -32,6 +33,7 @@
         tabla_id.textContent = data.tabla_id;
         valor.textContent = data.valor;
         input_rowquid.value = data.rowquid;
+        input_opcion.value = "editar";
         card_show.classList.remove('d-none');
         card_form.classList.add('d-none');
         btnVerMas('true');
@@ -43,7 +45,12 @@
         ajaxRequest({ url: url, data: { rowquid: rowquid} }, function (data) {
             if (data.ok){
                 initShow(data);
-
+            }else{
+                btnVerMas('true');
+                resetForm();
+                input_rowquid.value = '';
+                card_show.classList.add('d-none');
+                card_form.classList.remove('d-none');
             }
             verCargando('div_card_show', false);
         })
@@ -52,6 +59,11 @@
     function refreshShow() {
         let rowquid = input_rowquid.value;
         getShow(rowquid);
+    }
+
+    function create() {
+        input_opcion.value = "create";
+        resetForm();
     }
 
     function borrarRegistro() {
@@ -67,6 +79,7 @@
                         btnVerMas('true');
                         resetForm();
                         input_rowquid.value = '';
+                        input_opcion.value = 'create';
                         card_show.classList.add('d-none');
                         card_form.classList.remove('d-none');
                     }
@@ -90,8 +103,19 @@
         form.classList.add('was-validated');
         if (form.checkValidity()){
             verCargando('content_view_parametros');
-            let url = "<?= route('parametros') ?>";
-            ajaxRequest({ url: url, form: form }, function (data) {
+            let opcion = input_opcion.value;
+            let url;
+            let data;
+            if (opcion === "create"){
+                url = "<?= route('parametros') ?>";
+                data = {};
+            }else {
+                url = "<?= route('parametros/edit') ?>";
+                data = {
+                    rowquid: input_rowquid.value,
+                }
+            }
+            ajaxRequest({ url: url, form: form, data: data }, function (data) {
                 //acciones extras
                 verCargando('content_view_parametros', false);
                 if (data.ok){
