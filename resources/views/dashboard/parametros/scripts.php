@@ -64,6 +64,8 @@
     function create() {
         input_opcion.value = "create";
         resetForm();
+        card_show.classList.add('d-none');
+        card_form.classList.remove('d-none');
     }
 
     function borrarRegistro() {

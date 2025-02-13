@@ -70,4 +70,14 @@ trait CardView
         return $num;
     }
 
+    public function setActualRowquid(string $actualRowquid): void
+    {
+        $_SESSION[APP_KEY.'rowquid'] = $actualRowquid;
+    }
+
+    public function getActualRowquid(): string
+    {
+        return $_SESSION[APP_KEY.'rowquid'];
+    }
+
 }

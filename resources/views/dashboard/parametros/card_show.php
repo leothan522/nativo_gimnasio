@@ -9,7 +9,7 @@
                 <i class="fa-solid fa-rotate"></i>
             </button>
 
-            <button type="button" class="btn btn-tool">
+            <button type="button" class="btn btn-tool" onclick="create()">
                 <i class="fa-solid fa-file"></i> Nuevo
             </button>
 

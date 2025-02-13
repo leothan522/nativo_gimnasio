@@ -30,12 +30,16 @@ class ParametrosController extends Controller
                 $data['ocultarShow'] = false;
                 $data['ocultarForm'] = true;
                 $data['title'] = "Editar Parametro";
-                $data['lastRegistro'] = $this->lastRegistro();
+                $row = $this->lastRegistro();
+                $data['lastRegistro'] = $row;
+                $this->setActualRowquid($row->rowquid);
+                $data['actualRowquid'] = $this->getActualRowquid();
             }else{
                 $data['ocultarShow'] = true;
                 $data['ocultarForm'] = false;
                 $data['title'] = "Crear Parametro";
                 $data['lastRegistro'] = null;
+                $data['actualRowquid'] = null;
             }
 
             return $this->view('dashboard.parametros.view', $data);
@@ -49,6 +53,7 @@ class ParametrosController extends Controller
     {
         try {
             $limit = $_POST['limit'] ?? 0;
+            $data = $this->initData();
             return $this->view('dashboard.parametros.table', $this->initData($limit));
 
         }catch (\Error|\Exception $e){
@@ -60,7 +65,9 @@ class ParametrosController extends Controller
     {
         try {
             $limit = $_POST['limit'] ?? 0;
-            return $this->view('dashboard.parametros.table', $this->initData($limit, true));
+            $data = $this->initData($limit, true);
+            $data['actualRowquid'] = $this->getActualRowquid();
+            return $this->view('dashboard.parametros.table', $data);
 
         }catch (\Error|\Exception $e){
             $this->showError('Error en el Controller', $e);
@@ -93,6 +100,8 @@ class ParametrosController extends Controller
             $data = array_values($this->VALID_DATA);
             $data[] = getRowquid($model);
             $row = $model->save($data);
+            $this->setActualRowquid($row->rowquid);
+            $row->actualRowquid = $this->getActualRowquid();
             $row->ok = true;
 
             return $this->json($row);
@@ -114,9 +123,12 @@ class ParametrosController extends Controller
                 $parametro->ok = true;
                 $parametro->noToast = true;
                 $data = $parametro;
+                $this->setActualRowquid($parametro->rowquid);
+                $data->actualRowquid = $this->getActualRowquid();
             }else{
                 $data['ok'] = false;
                 $data['noToast'] = true;
+                $data['actualRowquid'] = null;
             }
 
             return $this->json($data);
@@ -168,7 +180,7 @@ class ParametrosController extends Controller
         }
         $model = new Parametro();
         $totalRows = $model->where('id', '!=', 0)->count();
-        $parametros = $model->limit($this->limitRows)->all();
+        $parametros = $model->limit($this->limitRows)->orderBy('created_at', 'DESC')->all();
         $limitRows = $model->limit($this->limitRows)->count();
         $this->btnVerMas($limitRows, $totalRows);
 
@@ -186,7 +198,7 @@ class ParametrosController extends Controller
     protected function lastRegistro()
     {
         $model = new Parametro();
-        $parametro = $model->where('id', '!=', 0)->orderBy('created_at', 'desc')->first();
+        $parametro = $model->orderBy('created_at', 'DESC')->where('id', '!=', 0)->first();
         if ($parametro){
             return $parametro;
         }else{

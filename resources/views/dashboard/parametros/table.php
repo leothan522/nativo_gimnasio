@@ -47,8 +47,12 @@
                 <?php
                     if (!empty($listarRegistros)){
                     foreach ($listarRegistros as $row){
+                        $clase = '';
+                        if ($row->rowquid == $actualRowquid){
+                            $clase = 'table-warning';
+                        }
                 ?>
-                    <tr class="align-middle">
+                    <tr class="align-middle <?= $clase ?>">
                         <td class="text-uppercase"><?= $row->id ?></td>
                         <td class="text-uppercase text-truncate" style="max-width: 150px"><?= $row->nombre ?></td>
                         <td class="">
