@@ -4,6 +4,8 @@
     const card_form = document.querySelector("#div_card_form");
     const input_rowquid = document.querySelector('#input_rowquid');
 
+
+
     function btnVerMas(refresh = "false") {
         verCargando('content_table');
         let url;
@@ -52,6 +54,35 @@
         getShow(rowquid);
     }
 
+    function borrarRegistro() {
+        confirmToastBootstrap(function () {
+            verCargando('div_card_show');
+            let rowquid = input_rowquid.value;
+            let url = '<?= route('parametros/destroy') ?>';
+            ajaxRequest({ url: url, data: { rowquid: rowquid } }, function (data) {
+                if (data.ok){
+                    if (data.lastRegistro){
+                        getShow(data.rowquid);
+                    }else {
+                        btnVerMas('true');
+                        resetForm();
+                        input_rowquid.value = '';
+                        card_show.classList.add('d-none');
+                        card_form.classList.remove('d-none');
+                    }
+                }
+                verCargando('div_card_show', false);
+            });
+        });
+    }
+
+    function resetForm() {
+        const btn_reset_from = document.querySelector('#btn_reset_from');
+        btn_reset_from.click();
+        //pendiente antonny
+
+    }
+
     const form = document.querySelector('#form_parametros');
     form.addEventListener('submit', event => {
         event.preventDefault();
@@ -67,6 +98,7 @@
                     initShow(data);
                 }else {
                     //pendiente antonny
+                    //Manejar errors de GUMP
                 }
 
             });

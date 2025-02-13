@@ -126,6 +126,39 @@ class ParametrosController extends Controller
         }
     }
 
+    public function destroy()
+    {
+        try {
+
+            $rowquid = $_POST['rowquid'];
+            $model = new Parametro();
+            $parametro = $model->where('rowquid', $rowquid)->first();
+            if ($parametro){
+                $data = [
+                    'nombre' => "*".$parametro->nombre,
+                ];
+                $model->update($parametro->id, $data);
+                $model->delete($parametro->id);
+                $data['ok'] = true;
+            }else{
+                $data['ok'] = false;
+                $data['noToast'] = true;
+            }
+            if ($this->lastRegistro()){
+                $ultimo = $this->lastRegistro();
+                $data['lastRegistro'] = true;
+                $data['rowquid'] = $ultimo->rowquid;
+            }else{
+                $data['lastRegistro'] = false;
+            }
+
+            return $this->json($data);
+
+        }catch (\Error|\Exception $e){
+            $this->showError('Error en el Controller', $e);
+        }
+    }
+
     protected function initData($limit = 0, $refresh = false): array
     {
         if ($refresh){

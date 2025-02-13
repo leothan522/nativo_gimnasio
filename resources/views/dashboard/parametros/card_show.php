@@ -18,20 +18,12 @@
     <div class="card-body table-responsive" id="div_card_show_body" style="max-height: calc(100vh - 327px)">
 
         <?php include view_path('dashboard.parametros.show') ?>
-        <?php
-        if (isset($lastRegistro) && $lastRegistro){
-            $rowquid =  $lastRegistro->rowquid;
-        }else{
-            $rowquid = "NULL";
-        }
-        ?>
-        <input type="hidden" value="<?= $rowquid ?>" id="input_rowquid">
 
     </div>
     <!-- /.card-body -->
     <div class="card-footer text-center" id="div_card_show_footer">
 
-        <button type="button" class="btn btn-primary btn-sm me-1">
+        <button type="button" class="btn btn-primary btn-sm me-1" onclick="borrarRegistro()">
             <i class="fa-regular fa-trash-can"></i> Borrar
         </button>
 

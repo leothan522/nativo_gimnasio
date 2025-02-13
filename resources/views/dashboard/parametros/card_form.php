@@ -19,6 +19,7 @@
         <?php include view_path('dashboard.parametros.form') ?>
 
         <div class="row justify-content-end g-2">
+            <button type="reset" class="d-none" id="btn_reset_from">reset</button>
             <button type="submit" class="col-md-4 btn btn-block btn-success me-2">
                 <i class="fas fa-save me-1"></i>
                 Guardar
