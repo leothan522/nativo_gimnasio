@@ -9,6 +9,13 @@
         event.stopPropagation();
 
         form.classList.add('was-validated');
+        if (form.checkValidity()){
+            verCargando('form_web_profile');
+            let url = '<?= route('profile/update') ?>';
+            ajaxRequest({ url: url, form: form }, function (data) {
+                verCargando('form_web_profile', false);
+            });
+        }
     });
 
 

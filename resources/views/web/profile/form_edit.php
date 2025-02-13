@@ -7,7 +7,7 @@
                     <div class="col-12">
                         <label for="profile_input_password_edit" class="form-label text-primary-emphasis">Contraseña Actual</label>
                         <div class="input-group has-validation">
-                            <input id="profile_input_password_edit" name="password" type="text" class="form-control" placeholder="Ingrese la Contraseña"  required>
+                            <input id="profile_input_password_edit" name="password" type="password" class="form-control" placeholder="Ingrese la Contraseña"  required>
                             <div class="invalid-feedback" id="error_profile_input_password">Contraseña requerida.</div>
                         </div>
                     </div>
@@ -15,7 +15,7 @@
                     <div class="col-12">
                         <label for="profile_input_nombre" class="form-label text-primary-emphasis">Nombre</label>
                         <div class="input-group has-validation">
-                            <input id="profile_input_nombre" name="nombre" type="text" class="form-control" value="<?= \app\Providers\Auth::user()->name ?>" placeholder="Ingrese el Nombre" required>
+                            <input id="profile_input_nombre" name="name" type="text" class="form-control" value="<?= \app\Providers\Auth::user()->name ?>" placeholder="Ingrese el Nombre" required>
                             <div class="invalid-feedback" id="error_profile_input_nombre">Nombre requerido.</div>
                         </div>
                     </div>
@@ -30,8 +30,6 @@
 
 
                     <button class="btn btn-primary" type="submit">Guardar Cambios</button>
-
-
                 </div>
                 <?php verCargando(); ?>
             </form>
