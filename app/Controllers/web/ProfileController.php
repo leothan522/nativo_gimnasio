@@ -25,8 +25,17 @@ class ProfileController extends Controller
     public function update()
     {
         try {
+
+            $id = 0;
+            $rowquid = $_POST['rowquid'] ?? 'NULL';
+            $model = new User();
+            $existe = $model->where('rowquid', $rowquid)->first();
+            if ($existe){
+                $id = $existe->id;
+            }
+
             $rules = [
-                'email'       => 'required'|'valid_email',
+                'email'       => ['required', 'valid_email', 'unique' => Rule::unique('users', 'email', $id)],
                 'name'    => 'required|valid_name|max_len,50|min_len,3',
                 'password'    => 'required|max_len,50|min_len,8'
             ];
@@ -57,38 +66,34 @@ class ProfileController extends Controller
 
             $this->validate($rules, $messages, $filter);
 
-            $model = new User();
-            $row = [];
-
-            $user = $model->where('rowquid', $this->VALID_DATA['rowquid'])->first();
-            $id = $user->id;
-
-            $db_password = $user->password;
+            $db_password = $existe->password;
+            $db_email = $existe->email;
+            $db_name = $existe->name;
             $cambios = false;
-            $db_nombre = $user->name;
-            $db_email = $user->email;
+
             if (password_verify($this->VALID_DATA['password'], $db_password)){
-
-                if ($this->VALID_DATA['name'] != $db_nombre){
-                    $cambios = true;
-                    $model->update($id, ['name' => $this->VALID_DATA['name']]);
-                }
-
                 if ($this->VALID_DATA['email'] != $db_email){
                     $cambios = true;
-                    $model->update($id, ['email' => $this->VALID_DATA['email']]);
+                    $model->update($existe->id, ['email' => $this->VALID_DATA['email']]);
+                }
+
+                if ($this->VALID_DATA['name'] != $db_name){
+                    $cambios = true;
+                    $model->update($existe->id, ['name' => $this->VALID_DATA['name']]);
                 }
 
                 if ($cambios){
-                    $row = crearResponse(
-                        'Datos Actualizados',
-                        'Se ha actualizado los datos de su cuenta.',
-                        true,
-                        'success'
+                    $user = $model->find($existe->id);
+                    $response =crearResponse(
+                        'Datos actualizados exitosamente.',
+                        'Datos Actualizados.',
+                        true
                     );
+                    $response['name'] = $user->name;
+                    $response['email'] = $user->email;
                 }else{
-                    $row = crearResponse(
-                        'No se realizó ningún cambio.',
+                    $response = crearResponse(
+                        'No se realizó ningun cambio.',
                         'Sin Cambios.',
                         false,
                         'info'
@@ -96,11 +101,16 @@ class ProfileController extends Controller
                 }
 
             }else{
-                $row = crearResponse();
-                $row['errors'] = ['password' => 'La contraseña es incorrecta.'];
+                $response =  crearResponse(
+                    'La contraseña es incorrecta.',
+                    'Contraseña Incorrecta.',
+                    false,
+                    'warning'
+                );
             }
 
-            return $this->json($row);
+
+            return $this->json($response);
 
         }catch (\Error|\Exception $e){
             $response = $e->getMessage();

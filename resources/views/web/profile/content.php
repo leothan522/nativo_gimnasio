@@ -11,10 +11,10 @@
                             <h4 class="card-title">Detalles del perfil</h4>
                             <ul class="list-group">
                                 <li class="list-group-item border-0 d-flex justify-content-between align-items-center">
-                                    <strong>Nombre:</strong> <span class="text-uppercase"><?= \app\Providers\Auth::user()->name ?></span>
+                                    <strong>Nombre:</strong> <span id="text_user_name" class="text-uppercase"><?= \app\Providers\Auth::user()->name ?></span>
                                 </li>
                                 <li class="list-group-item border-0 d-flex justify-content-between align-items-center">
-                                    <strong>Correo:</strong> <span class=""><?= \app\Providers\Auth::user()->email ?></span>
+                                    <strong>Correo:</strong> <span id="text_user_email" class=""><?= \app\Providers\Auth::user()->email ?></span>
                                 </li>
                                 <li class="list-group-item border-0 d-flex justify-content-between align-items-center">
                                     <strong>Fecha de Registro:</strong> <span class=""><?= getFecha(\app\Providers\Auth::user()->created_at) ?></span>
