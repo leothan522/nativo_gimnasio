@@ -150,7 +150,7 @@ class ParametrosController extends Controller
                 $row = $model->update($existe->id, $data);
                 $row->ok = true;
             }else{
-                $row = crearResponse('Token de seguridad vencido por favor actualice.', null,);
+                $row = crearResponse('Token de seguridad vencido por favor actualice.', null);
             }
 
             return $this->json($row);
@@ -220,7 +220,21 @@ class ParametrosController extends Controller
         }
     }
 
-    protected function initData($limit = 0, $refresh = false): array
+    public function search()
+    {
+        try {
+            $keyword = $_POST['keyword'] ?? '';
+            $data = $this->initData(0, false, $keyword);
+            $data['keyword'] = $keyword;
+            $data['actualRowquid'] = $this->getActualRowquid();
+            return $this->view('dashboard.parametros.table', $data);
+
+        }catch (\Error|\Exception $e){
+            $this->showError('Error en el Controller', $e);
+        }
+    }
+
+    protected function initData($limit = 0, $refresh = false, $keyword = ''): array
     {
         if ($refresh){
             $this->limitRows = $limit;
@@ -229,8 +243,16 @@ class ParametrosController extends Controller
         }
         $model = new Parametro();
         $totalRows = $model->where('id', '!=', 0)->count();
-        $parametros = $model->limit($this->limitRows)->orderBy('created_at', 'DESC')->all();
-        $limitRows = $model->limit($this->limitRows)->count();
+
+        if (empty($keyword)){
+            $parametros = $model->limit($this->limitRows)->orderBy('created_at', 'DESC')->all();
+            $limitRows = $model->limit($this->limitRows)->count();
+        }else{
+            $sql = "SELECT * FROM `parametros` WHERE deleted_at IS NULL AND `nombre` LIKE '%$keyword%' OR `id` LIKE '%$keyword%' ORDER BY `created_at` DESC LIMIT 100;";
+            $parametros = $model->query($sql)->get();
+            $limitRows = $model->query($sql)->count();
+        }
+
         $this->btnVerMas($limitRows, $totalRows);
 
         $data =[

@@ -7,8 +7,8 @@
         <div class="float-sm-end">
             <form class="form-inline" novalidate id="form_buscar">
                 <div class="input-group mb-3 has-validation">
-                    <input type="text" class="form-control bg-transparent" placeholder="Buscar" required>
-                    <button type="submit" class="input-group-text">
+                    <input type="text" class="form-control bg-transparent" name="keyword" placeholder="Buscar" required>
+                    <button type="submit" class="input-group-text"id="btn_search_submit">
                         <i class="bi bi-search"></i>
                     </button>
                 </div>

@@ -4,7 +4,7 @@
             <?php if (isset($keyword)){ ?>
                 Búsqueda
                 <span class="text-nowrap">{ <b class="text-warning"><?= $keyword ?></b> }</span>
-                <span class="text-nowrap">[ <b class="text-warning">999</b> ]</span>
+                <span class="text-nowrap">[ <b class="text-warning"><?= $limitRows ?></b> ]</span>
                 <button class="d-sm-none btn btn-tool text-warning">
                     <i class="fas fa-times"></i>
                 </button>
@@ -19,7 +19,7 @@
             <button type="button" class="btn btn-tool" onclick="btnVerMas('true')">
                 <i class="fa-solid fa-rotate"></i>
             </button>
-            <?php if ($btnDisabled){ ?>
+            <?php if ($btnDisabled || isset($keyword)){ ?>
             <small class="opacity-25">
                 <i class="fa-solid fa-arrow-down-short-wide"></i> Ver mas
             </small>
@@ -51,6 +51,11 @@
                         if ($row->rowquid == $actualRowquid){
                             $clase = 'table-warning';
                         }
+                        $search = 'false';
+                        if (isset($keyword)){
+                            $search = 'true';
+                        }
+
                 ?>
                     <tr class="align-middle <?= $clase ?>">
                         <td class="text-uppercase"><?= $row->id ?></td>
@@ -59,7 +64,7 @@
                             <div class="btn-toolbar justify-content-center" role="toolbar" aria-label="Toolbar with button groups">
 
                                 <div class="btn-group" role="group" aria-label="First group">
-                                    <button type="button" class="btn btn-primary btn-sm" onclick="getShow('<?= $row->rowquid ?>')">
+                                    <button type="button" class="btn btn-primary btn-sm" onclick="getShow('<?= $row->rowquid ?>', '<?= $search ?>')">
                                         <i class="fa-solid fa-eye"></i>
                                     </button>
                                 </div>
@@ -72,7 +77,14 @@
                     }else{
                 ?>
                         <tr class="align-middle">
-                            <td colspan="3" class="text-uppercase text-center">Sin registros guardados.</td>
+                            <td colspan="3" class="text-uppercase text-center">
+                                <?php if (isset($keyword)){ ?>
+                                    Sin resustados para la busqueda
+                                <?php }else{ ?>
+                                    Sin registros guardados
+                                <?php } ?>
+
+                            </td>
                         </tr>
                 <?php } ?>
             </tbody>

@@ -1,6 +1,6 @@
 <div class="card card-primary card-outline <?php if ($ocultarForm){ echo 'd-none'; } ?>" id="div_card_form">
     <div class="card-header" id="div_card_form_header">
-        <h3 class="card-title">
+        <h3 class="card-title" id="form_header_title">
             <?= $title ?>
         </h3>
         <div class="card-tools">
@@ -29,4 +29,7 @@
         </form>
 
     </div>
+
+    <?php verCargando(); ?>
+
 </div>
