@@ -69,6 +69,7 @@ Route::get('parametros', [ParametrosController::class, 'index']);
 Route::post('parametros/limit', [ParametrosController::class, 'limit']);
 Route::post('parametros/refresh', [ParametrosController::class, 'refresh']);
 Route::post('parametros', [ParametrosController::class, 'save']);
+Route::post('parametros/edit', [ParametrosController::class, 'update']);
 Route::post('parametros/show', [ParametrosController::class, 'show']);
 Route::post('parametros/destroy', [ParametrosController::class, 'destroy']);
 
@@ -76,6 +77,7 @@ Route::post('parametros/destroy', [ParametrosController::class, 'destroy']);
 //WEB **********************************************************************************************
 Route::get('web', [WebController::class, 'index']);
 Route::get('profile', [ProfileController::class, 'index']);
+Route::post('profile/update', [ProfileController::class, 'update']);
 
 
 

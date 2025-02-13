@@ -98,6 +98,12 @@
     <!-- Template Javascript -->
     <script src="<?php asset('vendor/finanza/js/main.js'); ?>"></script>
 
+
+    <!-- Template Javascript -->
+    <script src="<?php asset('vendor/finanza/js/main.js'); ?>"></script>
+    <script src="<?php asset('vendor/finanza/js/app.js', true); ?>"></script>
+    <script src="<?php asset('vendor/finanza/js/toastBootstrap.js', true); ?>"></script>
+
     <?php include view_path('web.profile.scripts')?>"
 </body>
 
