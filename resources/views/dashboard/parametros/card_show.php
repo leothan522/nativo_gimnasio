@@ -1,4 +1,4 @@
-<div class="card card-primary card-outline" id="div_card_show">
+<div class="card card-primary card-outline <?php if ($ocultarShow){ echo 'd-none'; } ?>" id="div_card_show">
     <div class="card-header" id="div_card_show_header">
         <h3 class="card-title">
             $title

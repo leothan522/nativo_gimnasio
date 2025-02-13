@@ -19,27 +19,43 @@ class ParametrosController extends Controller
         $this->setMODULO("parametros");
     }
 
-    public $totalRows = 5;
-
     function index()
     {
         try {
 
-            $model = new Parametro();
-            $total = $model->where('id', '!=', 0)->count();
-            $parametros = $model->limit($this->totalRows)->all();
+            $data = $this->initData();
 
-            $this->getData();
-            $this->data['title'] = "hola";
+            if ($data['totalRows'] > 0){
+                $data['ocultarShow'] = false;
+                $data['ocultarForm'] = true;
+            }else{
+                $data['ocultarShow'] = true;
+                $data['ocultarForm'] = false;
+            }
 
-            $data =[
-                "title" => "Parametros",
-                "parametros" => $parametros,
-                "total" => $total,
-                "totalRows" => $this->totalRows
-            ];
+            return $this->view('dashboard.parametros.view', $data);
 
-            return $this->view('dashboard.parametros.view', $this->data);
+        }catch (\Error|\Exception $e){
+            $this->showError('Error en el Controller', $e);
+        }
+    }
+
+    public function limit()
+    {
+        try {
+            $limit = $_POST['limit'] ?? 0;
+            return $this->view('dashboard.parametros.table', $this->initData($limit));
+
+        }catch (\Error|\Exception $e){
+            $this->showError('Error en el Controller', $e);
+        }
+    }
+
+    public function refresh()
+    {
+        try {
+            $limit = $_POST['limit'] ?? 0;
+            return $this->view('dashboard.parametros.table', $this->initData($limit, true));
 
         }catch (\Error|\Exception $e){
             $this->showError('Error en el Controller', $e);
@@ -80,22 +96,29 @@ class ParametrosController extends Controller
             $this->showError('Error en el Controller', $e);
         }
 
-
     }
 
-    function setLimit()
+    protected function initData($limit = 0, $refresh = false): array
     {
+        if ($refresh){
+            $this->limitRows = $limit;
+        }else{
+            $this->setLimit($limit);
+        }
         $model = new Parametro();
-        $total = $model->where('id', '!=', 0)->count();
-        $parametros = $model->limit($this->totalRows)->all();
+        $totalRows = $model->where('id', '!=', 0)->count();
+        $parametros = $model->limit($this->limitRows)->all();
+        $limitRows = $model->limit($this->limitRows)->count();
+        $this->btnVerMas($limitRows, $totalRows);
 
         $data =[
-            "title" => "Parametros",
-            "parametros" => $parametros,
-            "total" => $total,
-            "totalRows" => $this->totalRows
+            "MODULO" => $this->MODULO,
+            "totalRows" => $totalRows,
+            "limitRows" => $limitRows,
+            "btnDisabled" => $this->btnDisabled,
+            "listarRegistros" => $parametros,
         ];
-        return $this->view('dashboard.parametros.components.table', $data);
+        return $data;
     }
 
 }

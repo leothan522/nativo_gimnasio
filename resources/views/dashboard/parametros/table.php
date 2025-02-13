@@ -1,22 +1,34 @@
 <div class="card card-primary card-outline" id="div_card_table">
     <div class="card-header" id="div_card_table_header">
         <h3 class="card-title">
-            Búsqueda
-            <span class="text-nowrap">{ <b class="text-warning">text</b> }</span>
-            <span class="text-nowrap">[ <b class="text-warning">999</b> ]</span>
-            <button class="d-sm-none btn btn-tool text-warning">
-                <i class="fas fa-times"></i>
-            </button>
-            <!--Todos [ <b class="text-warning">9999</b> ]-->
+            <?php if (isset($keyword)){ ?>
+                Búsqueda
+                <span class="text-nowrap">{ <b class="text-warning"><?= $keyword ?></b> }</span>
+                <span class="text-nowrap">[ <b class="text-warning">999</b> ]</span>
+                <button class="d-sm-none btn btn-tool text-warning">
+                    <i class="fas fa-times"></i>
+                </button>
+            <?php }else{ ?>
+                Todos [ <b class="text-warning"><?= formatoMillares($totalRows, 0) ?></b> ]
+            <?php } ?>
+
+
         </h3>
         <div class="card-tools">
 
-            <button type="button" class="btn btn-tool">
+            <button type="button" class="btn btn-tool" onclick="btnVerMas('true')">
                 <i class="fa-solid fa-rotate"></i>
             </button>
-            <button type="button" class="btn btn-tool" onclick="verMas()">
+            <?php if ($btnDisabled){ ?>
+            <small class="opacity-25">
                 <i class="fa-solid fa-arrow-down-short-wide"></i> Ver mas
-            </button>
+            </small>
+            <?php }else{ ?>
+                <button type="button" class="btn btn-tool" onclick="btnVerMas()">
+                    <i class="fa-solid fa-arrow-down-short-wide"></i> Ver mas
+                </button>
+            <?php } ?>
+
 
         </div>
     </div>
@@ -28,14 +40,14 @@
             <tr>
                 <th class="text-uppercase text-primary-emphasis">Codigo</th>
                 <th class="text-uppercase text-primary-emphasis">Nombre</th>
-                <th class="text-center text-primary-emphasis" style="width: 10%"><small class="text-nowrap">Rows 999</small></th>
+                <th class="text-center text-primary-emphasis" style="width: 10%"><small class="text-nowrap">Rows <?= $limitRows ?></small></th>
             </tr>
             </thead>
             <tbody id="tbody_card_table">
-                <?php for ($i = 0; $i < 50; $i++){ ?>
+                <?php foreach ($listarRegistros as $row){ ?>
                     <tr class="align-middle">
-                        <td class="text-uppercase">20.025.623</td>
-                        <td class="text-uppercase text-truncate" style="max-width: 150px">yonathan leonardo castillo romero</td>
+                        <td class="text-uppercase"><?= $row->id ?></td>
+                        <td class="text-uppercase text-truncate" style="max-width: 150px"><?= $row->nombre ?></td>
                         <td class="">
                             <div class="btn-toolbar justify-content-center" role="toolbar" aria-label="Toolbar with button groups">
 
@@ -52,13 +64,13 @@
             </tbody>
         </table>
 
-
+        <?php verCargando(); ?>
 
 
     </div>
     <!-- /.card-body -->
     <div class="card-footer" id="div_card_table_footer">
-        <span data-rows="9999" id="total_rows"> Mostrando <b class="text-warning">9999</b></span>
+        <span data-rows="<?= $limitRows ?>" id="total_rows"> Mostrando <b class="text-warning"><?= $limitRows ?></b></span>
     </div>
     <!-- /.card-footer-->
 </div>

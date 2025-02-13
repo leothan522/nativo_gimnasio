@@ -1,4 +1,23 @@
-<script>
+<script type="application/javascript">
+
+
+    function btnVerMas(refresh = "false") {
+        verCargando('content_table');
+        let url;
+        if (refresh !== "false") {
+            url = '<?= route('parametros/refresh') ?>';
+
+        }else {
+            url = '<?= route('parametros/limit') ?>';
+        }
+
+        let limit = document.querySelector('#total_rows').dataset.rows;
+
+        ajaxRequest({ url: url, response: "html", data: { limit: limit } }, function (data) {
+            document.getElementById('content_table').innerHTML = data;
+            verCargando('content_table', false);
+        })
+    }
 
     /*function display(opcion = 'table') {
         verCargando('content_view_parametros');

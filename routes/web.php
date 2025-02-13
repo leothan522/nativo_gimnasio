@@ -66,8 +66,10 @@ Route::post('test', [TestController::class, 'testGUMP']);
 
 //DASHBOARD **************************************************************************************
 Route::get('parametros', [ParametrosController::class, 'index']);
-Route::post('parametro', [ParametrosController::class, 'store']);
-Route::post('parametros/setLimit', [ParametrosController::class, 'setLimit']);
+Route::post('parametros/limit', [ParametrosController::class, 'limit']);
+Route::post('parametros/refresh', [ParametrosController::class, 'refresh']);
+Route::post('parametros', [ParametrosController::class, 'store']);
+
 
 //WEB **********************************************************************************************
 Route::get('web', [WebController::class, 'index']);
