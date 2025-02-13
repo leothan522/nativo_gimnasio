@@ -1,15 +1,9 @@
-<div class="row justify-content-center" id="row_div_table_parametros">
-    <div class="col-lg-8 col-xl-6">
-        <?php include view_path('dashboard.parametros.components.table'); ?>
+<div class="row justify-content-center">
+    <div class="col-md-5 col-lg-4">
+        <?php include view_path('dashboard.parametros.table') ?>
     </div>
-</div>
-
-<div class="row justify-content-center d-none" id="row_div_form_parametros">
-    <div class="col-md-6 col-lg-5 col-xl-4">
-        <?php require view_path('dashboard.parametros.components.form'); ?>
+    <div class="col-md-7 col-lg-8">
+        <?php include view_path('dashboard.parametros.card_show') ?>
+        <?php include view_path('dashboard.parametros.card_form') ?>
     </div>
-</div>
-
-<div class="row">
-    <?php require view_path('dashboard.parametros.components.modal'); ?>
 </div>

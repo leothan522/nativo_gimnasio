@@ -1,6 +1,6 @@
 <script>
 
-    function display(opcion = 'table') {
+    /*function display(opcion = 'table') {
         verCargando('content_view_parametros');
         const form = document.querySelector('#row_div_form_parametros');
         const table = document.querySelector('#row_div_table_parametros');
@@ -50,9 +50,7 @@
 
     function verMas() {
         const rows = document.querySelector('#total_rows_parametros');
-
-
-    }
+    }*/
 
 
     console.log('Hi!')

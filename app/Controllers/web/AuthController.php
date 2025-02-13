@@ -125,7 +125,7 @@ class AuthController extends Controller
     public function logout(): void
     {
         Auth::logout();
-        redirect('login');
+        redirect('/');
     }
 
     public function validateEmail()

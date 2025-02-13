@@ -54,8 +54,11 @@
 
             <!--begin::Start Navbar Links-->
             <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link" data-lte-toggle="sidebar" href="#" role="button"> <i
-                                class="bi bi-list"></i> </a></li>
+                <li class="nav-item">
+                    <a class="nav-link" data-lte-toggle="sidebar" href="#" role="button">
+                        <i class="bi bi-list"></i>
+                    </a>
+                </li>
 
                 <?php include view_path('layouts.adminlte._blank.components.navbar_links'); ?>
                 <!--
@@ -288,15 +291,7 @@
         <!--begin::Sidebar Brand-->
         <div class="sidebar-brand">
             <!--begin::Brand Link-->
-            <a href="<?= route('/') ?>" class="brand-link">
-                <!--begin::Brand Image-->
-                <img src="<?php asset('vendor/adminlte/assets/img/AdminLTELogo.png'); ?>" alt="AdminLTE Logo"
-                     class="brand-image opacity-75 shadow">
-                <!--end::Brand Image-->
-                <!--begin::Brand Text-->
-                <span class="brand-text fw-light">AdminLTE 4</span>
-                <!--end::Brand Text-->
-            </a>
+            <?php include view_path('layouts.adminlte.sidebar_brand')?>
             <!--end::Brand Link-->
         </div>
         <!--end::Sidebar Brand-->
