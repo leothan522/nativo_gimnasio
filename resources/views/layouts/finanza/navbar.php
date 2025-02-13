@@ -8,7 +8,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto p-4 p-lg-0">
-            <a href="index.html" class="nav-item nav-link active">Inicio</a>
+            <a href="<?= route('web'); ?>" class="nav-item nav-link <?php if ($modulo == 'inicio'){ echo 'active'; } ?>">Inicio</a>
             <a href="about.html" class="nav-item nav-link">Membresía</a>
             <!--<a href="service.html" class="nav-item nav-link">Services</a>-->
             <a href="contact.html" class="nav-item nav-link">Contáctanos</a>
@@ -23,9 +23,9 @@
                 </div>
             </div>-->
             <div class="nav-item dropdown">
-                <a href="#" class="nav-link dropdown-toggle text-capitalize" data-bs-toggle="dropdown"><?= \app\Providers\Auth::user()->name ?></a>
+                <a href="#" class="nav-link dropdown-toggle text-capitalize <?php if ($modulo == 'profile'){ echo 'active'; } ?>" data-bs-toggle="dropdown"><?= \app\Providers\Auth::user()->name ?></a>
                 <div class="dropdown-menu border-light m-0">
-                    <a href="<?= route('profile') ?>" class="dropdown-item">Perfil <span class="float-end"><i class="fas fa-user text-primary"></i></span></a>
+                    <a href="<?= route('profile') ?>" class="dropdown-item <?php if ($modulo == 'profile'){ echo 'active'; } ?>">Perfil <span class="float-end"><i class="fas fa-user <?php if ($modulo == 'profile'){ echo 'text-white'; }else{ echo 'text-primary'; } ?>"></i></span></a>
                     <a id="btn_pruebas" href="<?= route('logout') ?>" class="dropdown-item">Salir <span class="float-end"><i class="fas fa-sign-out-alt text-primary"></i></span></a>
 
                 </div>

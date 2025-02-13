@@ -4,6 +4,7 @@ namespace app\Controllers\web;
 
 use app\Controllers\Controller;
 use app\Middlewares\Middleware;
+use app\Providers\Auth;
 
 class ProfileController extends Controller
 {
@@ -13,7 +14,10 @@ class ProfileController extends Controller
     }
 
     public function index(){
-        return $this->view('web.profile.view');
+        $data = [
+            'modulo' => 'profile',
+        ];
+        return $this->view('web.profile.view', $data);
     }
 
 }

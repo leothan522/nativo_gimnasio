@@ -6,7 +6,7 @@
 <!-- Carousel End -->
 
 <!-- About Start -->
-<div class="container-xxl py-5">
+<div class="container-xxl py-5 d-none">
     <div class="container">
         <div class="row g-4 align-items-end mb-4">
             <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
@@ -110,7 +110,7 @@
 
 
 <!-- Facts Start -->
-<div class="container-fluid facts my-5 py-5">
+<div class="container-fluid facts my-5 py-5 d-none">
     <div class="container py-5">
         <div class="row g-5">
             <div class="col-sm-6 col-lg-3 text-center wow fadeIn" data-wow-delay="0.1s">
@@ -144,7 +144,7 @@
 
 
 <!-- Features Start -->
-<div class="container-xxl feature py-5">
+<div class="container-xxl feature py-5 d-none">
     <div class="container">
         <div class="row g-5 align-items-center">
             <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
@@ -199,7 +199,7 @@
 
 
 <!-- Service Start -->
-<div class="container-xxl service py-5">
+<div class="container-xxl service py-5 d-none">
     <div class="container">
         <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
             <p class="d-inline-block border rounded text-primary fw-semi-bold py-1 px-3">Our Services</p>
@@ -317,7 +317,7 @@
 
 
 <!-- Callback Start -->
-<div class="container-fluid callback my-5 pt-5">
+<div class="container-fluid callback my-5 pt-5 d-none">
     <div class="container pt-5">
         <div class="row justify-content-center">
             <div class="col-lg-7">
@@ -372,7 +372,7 @@
 
 
 <!-- Projects Start -->
-<div class="container-xxl py-5">
+<div class="container-xxl py-5 d-none">
     <div class="container">
         <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
             <p class="d-inline-block border rounded text-primary fw-semi-bold py-1 px-3">Our Projects</p>
@@ -422,7 +422,7 @@
 
 
 <!-- Team Start -->
-<div class="container-xxl py-5">
+<div class="container-xxl py-5 d-none">
     <div class="container">
         <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
             <p class="d-inline-block border rounded text-primary fw-semi-bold py-1 px-3">Our Team</p>
@@ -481,7 +481,7 @@
 
 
 <!-- Testimonial Start -->
-<div class="container-xxl py-5">
+<div class="container-xxl py-5 d-none">
     <div class="container">
         <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
             <p class="d-inline-block border rounded text-primary fw-semi-bold py-1 px-3">Testimonial</p>
