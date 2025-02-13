@@ -4,6 +4,7 @@ use app\Controllers\dashboard\ParametrosController;
 use app\Controllers\test\TestController;
 use app\Controllers\web\AuthController;
 use app\Controllers\web\GuestController;
+use app\Controllers\web\ProfileController;
 use app\Controllers\web\WebController;
 use app\Controllers\web\WellcomeController;
 use lib\Facades\Route;
@@ -70,6 +71,7 @@ Route::post('parametros/setLimit', [ParametrosController::class, 'setLimit']);
 
 //WEB **********************************************************************************************
 Route::get('web', [WebController::class, 'index']);
+Route::get('profile', [ProfileController::class, 'index']);
 
 
 
