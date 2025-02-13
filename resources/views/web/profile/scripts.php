@@ -1,5 +1,7 @@
 <script type="application/javascript">
     const form = document.querySelector("#form_web_profile");
+    const form_password = document.querySelector("#form_profile_password");
+
     const input_name = document.querySelector("#profile_input_nombre");
     const error_name = document.querySelector("#error_profile_input_name");
     const input_email = document.querySelector("#profile_input_email");
@@ -59,6 +61,18 @@
             });
         }
     });
+
+    form_password.addEventListener('submit', event => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        form.classList.add('was-validated');
+        if (form.checkValidity()){
+            verCargando('form_profile_password');
+        }
+
+    });
+
 
     function resetForm(data) {
         form.classList.remove('was-validated');
