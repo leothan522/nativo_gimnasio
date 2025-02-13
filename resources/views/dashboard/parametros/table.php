@@ -55,7 +55,7 @@
                             <div class="btn-toolbar justify-content-center" role="toolbar" aria-label="Toolbar with button groups">
 
                                 <div class="btn-group" role="group" aria-label="First group">
-                                    <button type="button" class="btn btn-primary btn-sm">
+                                    <button type="button" class="btn btn-primary btn-sm" onclick="getShow('<?= $row->rowquid ?>')">
                                         <i class="fa-solid fa-eye"></i>
                                     </button>
                                 </div>
@@ -68,7 +68,7 @@
                     }else{
                 ?>
                         <tr class="align-middle">
-                            <td colspan="3" class="text-uppercase">Sin registros guardados.</td>
+                            <td colspan="3" class="text-uppercase text-center">Sin registros guardados.</td>
                         </tr>
                 <?php } ?>
             </tbody>
@@ -80,7 +80,7 @@
     </div>
     <!-- /.card-body -->
     <div class="card-footer" id="div_card_table_footer">
-        <span data-rows="<?= $limitRows ?>" id="total_rows"> Mostrando <b class="text-warning"><?= $limitRows ?></b></span>
+        <span data-rows="<?= $limit ?>" id="total_rows"> Mostrando <b class="text-warning"><?= $limitRows ?></b></span>
     </div>
     <!-- /.card-footer-->
 </div>

@@ -17,7 +17,7 @@
                     <label for="parametros_input_nombre" class="form-label text-primary-emphasis">Nombre</label>
                     <div class="input-group has-validation">
                         <input id="parametros_input_nombre" name="nombre" type="text" class="form-control" placeholder="Ingrese el Nombre" required>
-                        <div class="valid-feedback" id="error_parametros_input_nombre">Looks good!</div>
+                        <div class="invalid-feedback" id="error_parametros_input_nombre">Looks good!</div>
                     </div>
                 </div>
 
@@ -25,7 +25,7 @@
                     <label for="parametros_input_tabla_id" class="form- text-primary-emphasis">Tabla_id</label>
                     <div class="input-group has-validation">
                         <input id="parametros_input_tabla_id" name="tabla_id" type="text" class="form-control" placeholder="Ingrese la Tabla_id" required>
-                        <div class="valid-feedback">Looks good!</div>
+                        <div class="invalid-feedback">Looks good!</div>
                     </div>
                 </div>
 
@@ -33,7 +33,7 @@
                     <label for="parametros_input_valor" class="form-label text-primary-emphasis">Valor</label>
                     <div class="input-group has-validation">
                         <input id="parametros_input_valor" name="valor" type="text" class="form-control" placeholder="Ingrese el Valor" required>
-                        <div class="valid-feedback">Looks good!</div>
+                        <div class="invalid-feedback">Looks good!</div>
                     </div>
                 </div>
 

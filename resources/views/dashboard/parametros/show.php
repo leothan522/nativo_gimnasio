@@ -15,31 +15,43 @@
                 <div class="ms-2 me-auto">
                     <div>Nombre:</div>
                 </div>
-                <span class="fw-bold text-primary ms-2 text-uppercase">Yonathan Leonardo</span>
+                <span class="fw-bold text-primary ms-2 text-uppercase" id="show_nombre">
+                    <?php
+                    if (isset($lastRegistro) && $lastRegistro){
+                        echo $lastRegistro->nombre;
+                    }else{
+                        echo "NULL";
+                    }
+                    ?>
+                </span>
             </li>
             <li class="list-group-item list-group-item-light d-flex justify-content-between align-items-start">
                 <div class="ms-2 me-auto">
-                    <div>Nombre:</div>
+                    <div>Tabla_id:</div>
                 </div>
-                <span class="fw-bold text-primary ms-2 text-uppercase">Yonathan Leonardo</span>
+                <span class="fw-bold text-primary ms-2 text-uppercase" id="show_tabla_id">
+                    <?php
+                    if (isset($lastRegistro) && $lastRegistro){
+                        echo $lastRegistro->tabla_id;
+                    }else{
+                        echo "NULL";
+                    }
+                    ?>
+                </span>
             </li>
             <li class="list-group-item list-group-item-light d-flex justify-content-between align-items-start">
                 <div class="ms-2 me-auto">
-                    <div>Nombre:</div>
+                    <div>Valor:</div>
                 </div>
-                <span class="fw-bold text-primary ms-2 text-uppercase">Yonathan Leonardo</span>
-            </li>
-            <li class="list-group-item list-group-item-light d-flex justify-content-between align-items-start">
-                <div class="ms-2 me-auto">
-                    <div>Nombre:</div>
-                </div>
-                <span class="fw-bold text-primary ms-2 text-uppercase">Yonathan Leonardo</span>
-            </li>
-            <li class="list-group-item list-group-item-light d-flex justify-content-between align-items-start">
-                <div class="ms-2 me-auto">
-                    <div>Nombre:</div>
-                </div>
-                <span class="fw-bold text-primary ms-2 text-uppercase">Yonathan Leonardo Yonathan Leonardo Yonathan</span>
+                <span class="fw-bold text-primary ms-2 text-uppercase" id="show_valor">
+                    <?php
+                    if (isset($lastRegistro) && $lastRegistro){
+                        echo $lastRegistro->valor;
+                    }else{
+                        echo "NULL";
+                    }
+                    ?>
+                </span>
             </li>
         </ol>
     </div>

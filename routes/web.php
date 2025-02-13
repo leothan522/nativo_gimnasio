@@ -69,6 +69,7 @@ Route::get('parametros', [ParametrosController::class, 'index']);
 Route::post('parametros/limit', [ParametrosController::class, 'limit']);
 Route::post('parametros/refresh', [ParametrosController::class, 'refresh']);
 Route::post('parametros', [ParametrosController::class, 'store']);
+Route::post('parametros/show', [ParametrosController::class, 'show']);
 
 
 //WEB **********************************************************************************************

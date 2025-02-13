@@ -59,7 +59,7 @@ trait CardView
 
     public function numRowsPaginate(): int
     {
-        $num = 1;
+        $num = 15;
         $model = new Parametro();
         $parametro = $model->where('nombre', "numRowsPaginate")->first();
         if ($parametro){

@@ -3,6 +3,7 @@
 namespace app\Controllers\dashboard;
 
 use app\Controllers\Controller;
+use app\Middlewares\Middleware;
 use app\Models\Parametro;
 use app\Providers\Mail;
 use app\Providers\Rule;
@@ -22,15 +23,19 @@ class ParametrosController extends Controller
     function index()
     {
         try {
-
+            Middleware::auth('/');
             $data = $this->initData();
 
             if ($data['totalRows'] > 0){
                 $data['ocultarShow'] = false;
                 $data['ocultarForm'] = true;
+                $data['title'] = "Editar Parametro";
+                $data['lastRegistro'] = $this->lastRegistro();
             }else{
                 $data['ocultarShow'] = true;
                 $data['ocultarForm'] = false;
+                $data['title'] = "Crear Parametro";
+                $data['lastRegistro'] = null;
             }
 
             return $this->view('dashboard.parametros.view', $data);
@@ -98,6 +103,29 @@ class ParametrosController extends Controller
 
     }
 
+    public function show()
+    {
+        try {
+
+            $rowquid = $_POST['rowquid'];
+            $model = new Parametro();
+            $parametro = $model->where('rowquid', $rowquid)->first();
+            if ($parametro){
+                $parametro->ok = true;
+                $parametro->noToast = true;
+                $data = $parametro;
+            }else{
+                $data['ok'] = false;
+                $data['noToast'] = true;
+            }
+
+            return $this->json($data);
+
+        }catch (\Error|\Exception $e){
+            $this->showError('Error en el Controller', $e);
+        }
+    }
+
     protected function initData($limit = 0, $refresh = false): array
     {
         if ($refresh){
@@ -115,10 +143,22 @@ class ParametrosController extends Controller
             "MODULO" => $this->MODULO,
             "totalRows" => $totalRows,
             "limitRows" => $limitRows,
+            "limit" => $this->limitRows,
             "btnDisabled" => $this->btnDisabled,
             "listarRegistros" => $parametros,
         ];
         return $data;
+    }
+
+    protected function lastRegistro()
+    {
+        $model = new Parametro();
+        $parametro = $model->where('id', '!=', 0)->orderBy('created_at', 'desc')->first();
+        if ($parametro){
+            return $parametro;
+        }else{
+            return null;
+        }
     }
 
 }
