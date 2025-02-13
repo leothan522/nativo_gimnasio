@@ -67,7 +67,7 @@
                 card_form.classList.remove('d-none');
             }
             verCargando('div_card_show', false);
-        })
+        });
     }
 
     function refreshShow() {
@@ -84,11 +84,20 @@
     }
 
     function edit() {
-        title.textContent = "Editar Parametro";
+        verCargando('div_card_show');
         let rowquid = input_rowquid.value;
-        input_opcion.value = "editar";
-        card_show.classList.add('d-none');
-        card_form.classList.remove('d-none');
+        let url = '<?= route('parametros/show') ?>';
+        ajaxRequest({ url: url, data: { rowquid: rowquid} }, function (data) {
+            if (data.ok){
+                initShow(data);
+                title.textContent = "Editar Parametro";
+                input_opcion.value = "editar";
+                card_show.classList.add('d-none');
+                card_form.classList.remove('d-none');
+            }
+            verCargando('div_card_show', false);
+        });
+
     }
 
     function borrarRegistro() {
