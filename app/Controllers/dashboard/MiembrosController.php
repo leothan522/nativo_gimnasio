@@ -6,7 +6,6 @@ use app\Controllers\Controller;
 use app\Middlewares\Middleware;
 use app\Models\Membresia;
 use app\Models\Miembro;
-use app\Models\Parametro;
 use app\Models\Persona;
 use app\Models\PersonaMembresia;
 use app\Models\User;
@@ -507,10 +506,20 @@ class MiembrosController extends Controller
 
 
         }else{
-            $sql = "SELECT * FROM `miembros` WHERE deleted_at IS NULL AND `personas_id` LIKE '%$keyword%' OR `id` LIKE '%$keyword%' ORDER BY `created_at` DESC LIMIT 100;";
+            $sql = "SELECT * FROM `personas` WHERE deleted_at IS NULL AND `cedula` LIKE '%$keyword%' OR `nombre` LIKE '%$keyword%' ORDER BY `created_at` DESC LIMIT 100;";
             $parametros = $model->query($sql)->get();
             $limitRows = $model->query($sql)->count();
-            $miembros = null;
+            $miembros = array();
+            foreach ($parametros as $parametro){
+                $miembro = $model->where('personas_id', $parametro->id)->first();
+                if ($miembro){
+                    $myObj = new \stdClass();
+                    $myObj->cedula = $parametro->cedula;
+                    $myObj->nombre = $parametro->nombre;
+                    $myObj->rowquid = $miembro->rowquid;
+                    $miembros[] = $myObj;
+                }
+            }
         }
 
         $this->btnVerMas($limitRows, $totalRows);
