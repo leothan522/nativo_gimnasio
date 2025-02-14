@@ -24,6 +24,7 @@ class MiembrosController extends Controller
         try {
             Middleware::auth('/');
             $data = $this->initData();
+
             $data['title'] = "Miembros";
 
             if ($data['totalRows'] > 0){
@@ -250,18 +251,20 @@ class MiembrosController extends Controller
             $parametros = $model->limit($this->limitRows)->orderBy('created_at', 'DESC')->all();
             $limitRows = $model->limit($this->limitRows)->count();
 
-            $miembros[] = new \stdClass();
+            $miembros = array();
             $i = 0;
             foreach ($parametros as $parametro){
                 $id = $parametro->personas_id;
                 $persona = $modelPersona->find($id);
                 if ($persona){
-                    $miembros[$i]->cedula = $persona->cedula;
-                    $miembros[$i]->nombre = $persona->nombre;
-                    $miembros[$i]->rowquid = $persona->id;
+                    $myObj = new \stdClass();
+                    $myObj->cedula = $persona->cedula;
+                    $myObj->nombre = $persona->nombre;
+                    $myObj->rowquid = $persona->rowquid;
+                    $miembros[] = $myObj;
                 }
-                $i++;
             }
+
 
         }else{
             $sql = "SELECT * FROM `miembros` WHERE deleted_at IS NULL AND `personas_id` LIKE '%$keyword%' OR `id` LIKE '%$keyword%' ORDER BY `created_at` DESC LIMIT 100;";

@@ -15,8 +15,8 @@ if (isset($lastRegistro) && $lastRegistro){
     <div class="col-md-7 col-lg-8">
         <?php include view_path('dashboard.miembros.card_show') ?>
         <?php include view_path('dashboard.miembros.card_form') ?>
-        <input type="hidden" value="<?= $rowquid ?>" id="input_rowquid">
-        <input type="hidden" value="<?= $opcion ?>" id="input_opcion">
+        <input type="text" value="<?= $rowquid ?>" id="input_rowquid">
+        <input type="text" value="<?= $opcion ?>" id="input_opcion">
 
     </div>
 </div>
