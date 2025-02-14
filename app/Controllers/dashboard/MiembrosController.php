@@ -202,39 +202,121 @@ class MiembrosController extends Controller
     {
         try {
 
-            $id = 0;
+            $persona = null;
             $rowquid = $_POST['rowquid'] ?? 'NULL';
-            $model = new Parametro();
+            $model = new Miembro();
+            $modelPersona = new Persona();
+            $modelPersonaMembresia = new PersonaMembresia();
             $existe = $model->where('rowquid', $rowquid)->first();
             if ($existe){
-                $id = $existe->id;
+                $initPersona = $modelPersona->find($existe->personas_id);
+                $initPersonaMembresia = $modelPersonaMembresia->where('personas_id', $initPersona->id)->first();
             }
 
             $rules = [
-                //"nombre" => "required|alpha_numeric_dash",
-                "nombre" => ['required', 'alpha_numeric_dash', 'unique' => Rule::unique('parametros', 'nombre', $id)],
-                "tabla_id" => "required|integer",
-                "valor" => "required"
+                "cedula" => ['required', 'integer', 'unique' => Rule::unique('personas', 'cedula', $initPersona->id)],
+                "email" => ['required', 'valid_email', 'unique' => Rule::unique('users', 'email', $initPersona->users_id)],
+                "nombre" => "required",
+                "telefono" => "required",
+                "direccion" => "required",
+                "inscripcion" => "required",
+                "membresia" => "required",
+                "inicio" => "required",
+                "status" => "required",
             ];
 
             $messages = [
-                "nombre" => ["alpha_numeric_dash" => "alpha_numeric_dash"]
+                //"nombre" => ["alpha_numeric_dash" => "alpha_numeric_dash"]
             ];
 
             $filter = [
-                "nombre" => "trim|sanitize_string|lower_case",
-                "valor" => "trim|sanitize_string"
+                "nombre" => "trim|sanitize_string",
+                "telefono" => "trim|sanitize_string",
+                "email" => "trim|sanitize_email|lower_case",
+                "direccion" => "sanitize_string"
             ];
 
             $this->validate($rules, $messages, $filter);
 
-            $data   = $this->VALID_DATA;
-            $rowquid = $data['rowquid'];
-            unset($data['rowquid']);
+            unset($this->VALID_DATA['rowquid']);
 
             if ($existe){
-                $row = $model->update($existe->id, $data);
-                $row->ok = true;
+
+                $initData = $this->VALID_DATA;
+
+                $modelUser = new User();
+                $dataUser = [
+                    'name' => $initData['nombre'],
+                    'email' => $initData['email'],
+                ];
+                $user = $modelUser->update($initPersona->users_id, $dataUser);
+
+                $modelPersona = new Persona();
+                $dataPersona = [
+                    'nombre' => $initData['nombre'],
+                    'cedula' => $initData['cedula'],
+                    'telefono' => $initData['telefono'],
+                    'direccion' => $initData['direccion'],
+                ];
+                $persona = $modelPersona->update($initPersona->id, $dataPersona);
+
+                $modelMiembro = new Miembro();
+                $dataMiembro = [
+                    'inscripcion' => $initData['inscripcion'],
+                ];
+                $miembro = $modelMiembro->update($existe->id, $dataMiembro);
+
+                $modelPersonaMembresia = new PersonaMembresia();
+                $dataMembresia = [
+                    'membresias_id' => $initData['membresia'],
+                    'fecha' => $initData['inicio'],
+                    'status' => $initData['status'],
+                ];
+                $personaMembresia = $modelPersonaMembresia->update($initPersonaMembresia->id, $dataMembresia);
+
+                $modelmembresia = new Membresia();
+                $membresia = $modelmembresia->find($personaMembresia->membresias_id);
+
+                $this->setActualRowquid($miembro->rowquid);
+
+                $status = 0;
+
+                if ($personaMembresia->status == 0){
+                    $status = "Pendiente por Pago";
+                }
+
+                if ($personaMembresia->status == 1){
+                    $status = "Activa";
+                }
+
+                if ($personaMembresia->status == 2){
+                    $status = "Inactiva";
+                }
+
+                $row = [
+                    "users_id"=> $user->id,
+                    "nombre"=> $persona->nombre,
+                    "cedula"=> $persona->cedula,
+                    "ver_cedula"=> formatoMillares($persona->cedula, 0),
+                    "telefono"=> $persona->telefono,
+                    "direccion"=> $persona->direccion,
+                    "token"=> $persona->token,
+                    "inscripcion"=> $miembro->inscripcion,
+                    "ver_inscripcion"=> getFecha($miembro->inscripcion),
+                    "rowquid"=> $miembro->rowquid,
+                    "email"=> $user->email,
+                    "inicio"=> $personaMembresia->fecha,
+                    "ver_inicio"=> getFecha($personaMembresia->fecha),
+                    "status"=> $personaMembresia->status,
+                    "ver_status"=> $status,
+                    "membresia_id"=> $personaMembresia->membresias_id,
+                    "membresia_nombre"=> $membresia->nombre,
+                    "membresia_duracion"=> $membresia->duracion,
+                    "membresia_precio"=> $membresia->precio,
+                    "ok"=> true,
+                    "actualRowquid"=> $this->getActualRowquid()
+                ];
+
             }else{
                 $row = crearResponse('Token de seguridad vencido por favor actualice.', null);
             }

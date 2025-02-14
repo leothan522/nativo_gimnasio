@@ -201,7 +201,7 @@
                 verCargando('div_card_form', false);
                 if (data.ok){
                     initShow(data);
-                    //btnVerMas('true');
+                    btnVerMas('true');
                 }else {
                     //pendiente antonny
                     //Manejar errors de GUMP
