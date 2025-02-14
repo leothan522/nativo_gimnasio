@@ -38,7 +38,7 @@
         <table class="table table-sm table-hover table-head-fixed">
             <thead class="table-light">
             <tr>
-                <th class="text-uppercase text-primary-emphasis">Codigo</th>
+                <th class="text-uppercase text-primary-emphasis">Cédula</th>
                 <th class="text-uppercase text-primary-emphasis">Nombre</th>
                 <th class="text-center text-primary-emphasis" style="width: 10%"><small class="text-nowrap">Rows <?= $limitRows ?></small></th>
             </tr>

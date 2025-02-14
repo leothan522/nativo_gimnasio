@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-6">
-        <h3 class="mb-0"><i class="fa-solid fa-list me-1"></i> Parametros</h3>
+        <h3 class="mb-0"><i class="fa-solid fa-users me-1"></i> Miembros</h3>
     </div>
 
     <div class="col-md-6 mt-2 mt-sm-auto">

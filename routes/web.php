@@ -1,5 +1,6 @@
 <?php
 
+use app\Controllers\dashboard\MiembrosController;
 use app\Controllers\dashboard\ParametrosController;
 use app\Controllers\test\TestController;
 use app\Controllers\web\AuthController;
@@ -73,6 +74,15 @@ Route::post('parametros/edit', [ParametrosController::class, 'update']);
 Route::post('parametros/show', [ParametrosController::class, 'show']);
 Route::post('parametros/destroy', [ParametrosController::class, 'destroy']);
 Route::post('parametros/search', [ParametrosController::class, 'search']);
+
+Route::get('miembros', [MiembrosController::class, 'index']);
+Route::post('miembros', [MiembrosController::class, 'save']);
+Route::post('miembros/limit', [MiembrosController::class, 'limit']);
+Route::post('miembros/refresh', [MiembrosController::class, 'refresh']);
+Route::post('miembros/edit', [MiembrosController::class, 'update']);
+Route::post('miembros/show', [MiembrosController::class, 'show']);
+Route::post('miembros/destroy', [MiembrosController::class, 'destroy']);
+Route::post('miembros/search', [MiembrosController::class, 'search']);
 
 
 //WEB **********************************************************************************************

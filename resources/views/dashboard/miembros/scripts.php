@@ -17,10 +17,10 @@
         verCargando('content_table');
         let url;
         if (refresh !== "false") {
-            url = '<?= route('parametros/refresh') ?>';
+            url = '<?= route('miembros/refresh') ?>';
 
         }else {
-            url = '<?= route('parametros/limit') ?>';
+            url = '<?= route('miembros/limit') ?>';
         }
 
         let limit = document.querySelector('#total_rows').dataset.rows;
@@ -50,7 +50,7 @@
 
     function getShow(rowquid, search = 'false') {
         verCargando('div_card_show');
-        let url = '<?= route('parametros/show') ?>';
+        let url = '<?= route('miembros/show') ?>';
         ajaxRequest({ url: url, data: { rowquid: rowquid} }, function (data) {
             if (data.ok){
                 initShow(data);
@@ -76,7 +76,7 @@
     }
 
     function create() {
-        title.textContent = "Crear Parametro";
+        title.textContent = "Crear Miembro";
         input_opcion.value = "create";
         resetForm();
         card_show.classList.add('d-none');
@@ -86,11 +86,11 @@
     function edit() {
         verCargando('div_card_show');
         let rowquid = input_rowquid.value;
-        let url = '<?= route('parametros/show') ?>';
+        let url = '<?= route('miembros/show') ?>';
         ajaxRequest({ url: url, data: { rowquid: rowquid} }, function (data) {
             if (data.ok){
                 initShow(data);
-                title.textContent = "Editar Parametro";
+                title.textContent = "Editar Miembro";
                 input_opcion.value = "editar";
                 card_show.classList.add('d-none');
                 card_form.classList.remove('d-none');
@@ -104,7 +104,7 @@
         confirmToastBootstrap(function () {
             verCargando('div_card_show');
             let rowquid = input_rowquid.value;
-            let url = '<?= route('parametros/destroy') ?>';
+            let url = '<?= route('miembros/destroy') ?>';
             ajaxRequest({ url: url, data: { rowquid: rowquid } }, function (data) {
                 if (data.ok){
                     if (data.lastRegistro){
@@ -137,7 +137,7 @@
         form_buscar.classList.add('was-validated');
         if (form_buscar.checkValidity()){
             verCargando('content_table');
-            let url = "<?= route('parametros/search') ?>";
+            let url = "<?= route('miembros/search') ?>";
             ajaxRequest({ url: url, response: "html", form: form_buscar }, function (data) {
                 //acciones extras
                 verCargando('content_table', false);
@@ -157,10 +157,10 @@
             let url;
             let data;
             if (opcion === "create"){
-                url = "<?= route('parametros') ?>";
+                url = "<?= route('miembros') ?>";
                 data = {};
             }else {
-                url = "<?= route('parametros/edit') ?>";
+                url = "<?= route('miembros/edit') ?>";
                 data = {
                     rowquid: input_rowquid.value,
                 }

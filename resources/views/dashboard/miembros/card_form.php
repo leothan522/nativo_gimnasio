@@ -1,7 +1,7 @@
 <div class="card card-primary card-outline <?php if ($ocultarForm){ echo 'd-none'; } ?>" id="div_card_form">
     <div class="card-header" id="div_card_form_header">
         <h3 class="card-title" id="form_header_title">
-            <?= $title ?>
+            Crear Parametro
         </h3>
         <div class="card-tools">
 
@@ -16,7 +16,7 @@
 
         <form novalidate class="row justify-content-center"  id="form_parametros">
 
-        <?php include view_path('dashboard.parametros.form') ?>
+        <?php include view_path('dashboard.miembros.form') ?>
 
         <div class="row justify-content-end g-2">
             <button type="reset" class="d-none" id="btn_reset_from">reset</button>

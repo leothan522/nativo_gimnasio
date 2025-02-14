@@ -4,6 +4,7 @@ namespace app\Controllers\dashboard;
 
 use app\Controllers\Controller;
 use app\Middlewares\Middleware;
+use app\Models\Miembro;
 use app\Models\Parametro;
 use app\Providers\Rule;
 use app\Traits\CardView;
@@ -22,11 +23,12 @@ class MiembrosController extends Controller
         try {
             Middleware::auth('/');
             $data = $this->initData();
+            $data['title'] = "Miembros";
 
             if ($data['totalRows'] > 0){
                 $data['ocultarShow'] = false;
                 $data['ocultarForm'] = true;
-                $data['title'] = "Editar Parametro";
+
                 $row = $this->lastRegistro();
                 $data['lastRegistro'] = $row;
                 $this->setActualRowquid($row->rowquid);
@@ -34,12 +36,11 @@ class MiembrosController extends Controller
             }else{
                 $data['ocultarShow'] = true;
                 $data['ocultarForm'] = false;
-                $data['title'] = "Crear Parametro";
                 $data['lastRegistro'] = null;
                 $data['actualRowquid'] = null;
             }
 
-            return $this->view('dashboard.parametros.view', $data);
+            return $this->view('dashboard.miembros.view', $data);
 
         }catch (\Error|\Exception $e){
             $this->showError('Error en el Controller', $e);
@@ -51,7 +52,7 @@ class MiembrosController extends Controller
         try {
             $limit = $_POST['limit'] ?? 0;
             $data = $this->initData();
-            return $this->view('dashboard.parametros.table', $this->initData($limit));
+            return $this->view('dashboard.miembros.table', $this->initData($limit));
 
         }catch (\Error|\Exception $e){
             $this->showError('Error en el Controller', $e);
@@ -64,7 +65,7 @@ class MiembrosController extends Controller
             $limit = $_POST['limit'] ?? 0;
             $data = $this->initData($limit, true);
             $data['actualRowquid'] = $this->getActualRowquid();
-            return $this->view('dashboard.parametros.table', $data);
+            return $this->view('dashboard.miembros.table', $data);
 
         }catch (\Error|\Exception $e){
             $this->showError('Error en el Controller', $e);
@@ -224,7 +225,7 @@ class MiembrosController extends Controller
             $data = $this->initData(0, false, $keyword);
             $data['keyword'] = $keyword;
             $data['actualRowquid'] = $this->getActualRowquid();
-            return $this->view('dashboard.parametros.table', $data);
+            return $this->view('dashboard.miembros.table', $data);
 
         }catch (\Error|\Exception $e){
             $this->showError('Error en el Controller', $e);
@@ -238,14 +239,14 @@ class MiembrosController extends Controller
         }else{
             $this->setLimit($limit);
         }
-        $model = new Parametro();
+        $model = new Miembro();
         $totalRows = $model->where('id', '!=', 0)->count();
 
         if (empty($keyword)){
             $parametros = $model->limit($this->limitRows)->orderBy('created_at', 'DESC')->all();
             $limitRows = $model->limit($this->limitRows)->count();
         }else{
-            $sql = "SELECT * FROM `parametros` WHERE deleted_at IS NULL AND `nombre` LIKE '%$keyword%' OR `id` LIKE '%$keyword%' ORDER BY `created_at` DESC LIMIT 100;";
+            $sql = "SELECT * FROM `miembros` WHERE deleted_at IS NULL AND `personas_id` LIKE '%$keyword%' OR `id` LIKE '%$keyword%' ORDER BY `created_at` DESC LIMIT 100;";
             $parametros = $model->query($sql)->get();
             $limitRows = $model->query($sql)->count();
         }
@@ -265,7 +266,7 @@ class MiembrosController extends Controller
 
     protected function lastRegistro()
     {
-        $model = new Parametro();
+        $model = new Miembro();
         $parametro = $model->orderBy('created_at', 'DESC')->where('id', '!=', 0)->first();
         if ($parametro){
             return $parametro;
@@ -273,4 +274,5 @@ class MiembrosController extends Controller
             return null;
         }
     }
+
 }

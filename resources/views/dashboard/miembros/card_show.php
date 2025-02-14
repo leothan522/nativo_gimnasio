@@ -1,7 +1,7 @@
 <div class="card card-primary card-outline <?php if ($ocultarShow){ echo 'd-none'; } ?>" id="div_card_show">
     <div class="card-header" id="div_card_show_header">
         <h3 class="card-title">
-            Ver Parametro
+            Ver Miembro
         </h3>
         <div class="card-tools">
 
@@ -17,7 +17,7 @@
     </div>
     <div class="card-body table-responsive" id="div_card_show_body" style="max-height: calc(100vh - 327px)">
 
-        <?php include view_path('dashboard.parametros.show') ?>
+        <?php include view_path('dashboard.miembros.show') ?>
 
     </div>
     <!-- /.card-body -->

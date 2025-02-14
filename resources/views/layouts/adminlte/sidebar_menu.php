@@ -34,6 +34,13 @@
     </ul>
 </li>-->
 
+<li class="nav-item">
+    <a href="<?= route('miembros') ?>" class="nav-link <?php if (isset($MODULO) && $MODULO == "miembros"){ echo "active"; } ?>">
+        <i class="nav-icon fa-solid fa-users"></i>
+        <p>Miembros</p>
+    </a>
+</li>
+
 <li class="nav-item <?php if (isset($MODULO) && ($MODULO == "usuarios" || $MODULO == "parametros")){ echo "menu-open"; } ?>">
     <a href="#" class="nav-link <?php if (isset($MODULO) && ($MODULO == "usuarios" || $MODULO == "parametros")){ echo "active"; } ?>">
         <i class="nav-icon fa-solid fa-gear"></i>
