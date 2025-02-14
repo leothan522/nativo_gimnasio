@@ -7,6 +7,7 @@ use app\Middlewares\Middleware;
 use app\Models\Miembro;
 use app\Models\Parametro;
 use app\Models\Persona;
+use app\Models\PersonaMembresia;
 use app\Models\User;
 use app\Providers\Rule;
 use app\Traits\CardView;
@@ -292,6 +293,7 @@ class MiembrosController extends Controller
         $model = new Miembro();
         $modelPersona = new Persona();
         $modelUser = new User();
+        $modelPersonaMembresia = new PersonaMembresia();
         $parametro = $model->orderBy('created_at', 'DESC')->where('id', '!=', 0)->first();
         if ($parametro){
             $miembros = null;
@@ -311,6 +313,8 @@ class MiembrosController extends Controller
 
                 $user = $modelUser->find($persona->users_id);
                 $myObj->email = $user->email;
+
+                
 
                 $miembros = $myObj;
             }
