@@ -21,4 +21,12 @@ class WebController extends Controller
         return $this->view('web.inicio.view', $data);
 
     }
+
+    public function membresia()
+    {
+        $data = [
+            'modulo' => 'inicio'
+        ];
+        return $this->view('web.inicio.view', $data);
+    }
 }

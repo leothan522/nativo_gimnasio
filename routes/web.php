@@ -77,8 +77,12 @@ Route::post('parametros/search', [ParametrosController::class, 'search']);
 
 //WEB **********************************************************************************************
 Route::get('web', [WebController::class, 'index']);
+Route::get('membresia', [WebController::class, 'membresia']);
+Route::post('membresia', [WebController::class, 'saveMembresia']);
+Route::post('membresia/edit', [WebController::class, 'updateMembresia']);
 Route::get('profile', [ProfileController::class, 'index']);
 Route::post('profile/update', [ProfileController::class, 'update']);
+Route::post('profile/update/password', [ProfileController::class, 'updatePassword']);
 
 
 
