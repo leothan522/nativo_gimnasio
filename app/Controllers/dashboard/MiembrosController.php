@@ -4,6 +4,7 @@ namespace app\Controllers\dashboard;
 
 use app\Controllers\Controller;
 use app\Middlewares\Middleware;
+use app\Models\Membresia;
 use app\Models\Miembro;
 use app\Models\Parametro;
 use app\Models\Persona;
@@ -294,6 +295,8 @@ class MiembrosController extends Controller
         $modelPersona = new Persona();
         $modelUser = new User();
         $modelPersonaMembresia = new PersonaMembresia();
+        $modelMembreseia = new Membresia();
+
         $parametro = $model->orderBy('created_at', 'DESC')->where('id', '!=', 0)->first();
         if ($parametro){
             $miembros = null;
@@ -314,7 +317,39 @@ class MiembrosController extends Controller
                 $user = $modelUser->find($persona->users_id);
                 $myObj->email = $user->email;
 
-                
+                $personaMembresia = $modelPersonaMembresia->where('personas_id', $persona->id)->first();
+                if ($personaMembresia){
+                    $idMembresia = $personaMembresia->membresias_id;
+                    $myObj->inicio = $personaMembresia->fecha;
+
+                    if ($personaMembresia->status == 0){
+                        $myObj->status = "Esperando Aprobación";
+                    }
+
+                    if ($personaMembresia->status == 1){
+                        $myObj->status = "Activa";
+                    }
+
+                    if ($personaMembresia->status == 0){
+                        $myObj->status = "Inactiva";
+                    }
+
+                    $membresia = $modelMembreseia->find($idMembresia);
+                    $myObj->membresia_nombre = $membresia->nombre;
+                    $myObj->membresia_duracion = $membresia->duracion;
+                    $myObj->membresia_precio = $membresia->precio;
+
+
+                }else{
+                    $myObj->inicio = '-';
+                    $myObj->status = '-';
+                    $myObj->membresia_nombre = '-';
+                    $myObj->membresia_duracion = '-';
+                    $myObj->membresia_precio = '-';
+                }
+
+
+
 
                 $miembros = $myObj;
             }
