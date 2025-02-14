@@ -1,4 +1,4 @@
-<div class="row p-3">
+<div class="row justify-content-center p-3">
     <!--<div class="col-sm-12 col-md-7">
         <div class="card">
             <div class="card-body">
@@ -27,13 +27,19 @@
         </div>
     </div>-->
 
-    <div class="card-body table-responsive" id="div_card_form_body" >
 
-        <form novalidate class="row justify-content-center"  id="form_parametros">
+
+
+    <div class="card-body table-responsive" id="div_card_form_body" >
+        <div class="col-12 text-center">
+            <p class="text-dark">Actualmente no posees una membresía. Por favor, completa los datos requeridos y selecciona una opción disponible.</p>
+        </div>
+
+        <form novalidate class="row justify-content-center"  id="form_membresias">
             <?php include view_path('web.membresias.form') ?>
 
         </form>
-
+        <?php verCargando(); ?>
     </div>
 
     <!--<div class="col-sm-12 col-md-8 p-sm-2">

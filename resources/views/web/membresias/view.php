@@ -104,7 +104,7 @@
     <script src="<?php asset('vendor/finanza/js/app.js', true); ?>"></script>
     <script src="<?php asset('vendor/finanza/js/toastBootstrap.js', true); ?>"></script>
 
-    <?php include view_path('web.membresias.scripts')?>"
+    <?php include view_path('web.membresias.scripts')?>
 </body>
 
 </html>
