@@ -83,6 +83,7 @@ Route::post('miembros/edit', [MiembrosController::class, 'update']);
 Route::post('miembros/show', [MiembrosController::class, 'show']);
 Route::post('miembros/destroy', [MiembrosController::class, 'destroy']);
 Route::post('miembros/search', [MiembrosController::class, 'search']);
+Route::get('miembros/excel', [MiembrosController::class, 'exportExcel']);
 
 
 //WEB **********************************************************************************************

@@ -471,6 +471,11 @@ class MiembrosController extends Controller
         }
     }
 
+    public function exportExcel()
+    {
+        return $this->view('excel.export_excel');
+    }
+
     protected function initData($limit = 0, $refresh = false, $keyword = ''): array
     {
         if ($refresh){
