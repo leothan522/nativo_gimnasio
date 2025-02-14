@@ -9,7 +9,7 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto p-4 p-lg-0">
             <a href="<?= route('web'); ?>" class="nav-item nav-link <?php if ($modulo == 'inicio'){ echo 'active'; } ?>">Inicio</a>
-            <a href="about.html" class="nav-item nav-link">Membresía</a>
+            <a href="<?= route('membresia'); ?>" class="nav-item nav-link <?php if ($modulo == 'membresia'){ echo 'active'; } ?>">Membresía</a>
             <!--<a href="service.html" class="nav-item nav-link">Services</a>-->
             <a href="contact.html" class="nav-item nav-link">Contáctanos</a>
             <!--<div class="nav-item dropdown">

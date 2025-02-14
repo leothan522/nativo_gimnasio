@@ -11,6 +11,7 @@ class PersonaMembresia extends Model
         'personas_id',
         'membresias_id',
         'fecha',
+        'status',
         'rowquid',
     ];
 }
