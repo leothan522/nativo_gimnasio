@@ -31,7 +31,7 @@
                 <div class="col-12">
                     <label for="input_telefono" class="form- text-primary-emphasis">Teléfono:</label>
                     <div class="input-group has-validation">
-                        <input id="input_telefono" name="Telefono" type="text" class="form-control" placeholder="Teléfono" required>
+                        <input id="input_telefono" name="telefono" type="text" class="form-control" placeholder="Teléfono" required>
                         <div class="invalid-feedback">Chequear!</div>
                     </div>
                 </div>
@@ -40,6 +40,14 @@
                     <label for="input_email" class="form-label text-primary-emphasis">Email:</label>
                     <div class="input-group has-validation">
                         <input id="input_email" name="email" type="email" class="form-control" placeholder="Email" required>
+                        <div class="invalid-feedback">Chequear!</div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <label for="input_direccion" class="form-label text-primary-emphasis">Dirección:</label>
+                    <div class="input-group has-validation">
+                        <input id="input_direccion" name="direccion" type="text" class="form-control" placeholder="Dirección" required>
                         <div class="invalid-feedback">Chequear!</div>
                     </div>
                 </div>
@@ -70,7 +78,7 @@
                 <div class="col-12">
                     <label for="input_inscripcion" class="form-label text-primary-emphasis">Inscripción:</label>
                     <div class="input-group has-validation">
-                        <input id="input_inscripcion" name="email" type="date" class="form-control" placeholder="Inscripción" required>
+                        <input id="input_inscripcion" name="inscripcion" type="date" class="form-control" placeholder="Inscripción" required>
                         <div class="invalid-feedback">Chequear!</div>
                     </div>
                 </div>
@@ -78,7 +86,7 @@
                 <div class="col-12">
                     <label for="input_membresia" class="form-label text-primary-emphasis">Membresia:</label>
                     <div class="input-group has-validation">
-                        <select id="input_membresia" class="form-select" aria-label="Membresia" required>
+                        <select id="input_membresia" name="membresia" class="form-select" aria-label="Membresia" required>
                             <option value="">Seleccione</option>
                             <?php foreach ($listarMembresias as $membresia){ ?>
                                 <option value="<?= $membresia->id ?>"><?= $membresia->nombre ?> [ <?= $membresia->duracion ?> | <?= $membresia->precio ?> ]</option>
@@ -92,6 +100,19 @@
                     <label for="input_inicio" class="form-label text-primary-emphasis">Inicio:</label>
                     <div class="input-group has-validation">
                         <input id="input_inicio" name="inicio" type="date" class="form-control" placeholder="Inicio" required>
+                        <div class="invalid-feedback" id="error_parametros_input_nombre">Chequear!</div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <label for="input_status" class="form-label text-primary-emphasis">Estatus:</label>
+                    <div class="input-group has-validation">
+                        <select id="input_status" name="status" class="form-select" aria-label="Estatus" required>
+                            <option value="">Seleccione</option>
+                            <option value="0">Pendiente por Pago</option>
+                            <option value="1">Activa</option>
+                            <option value="2">Inactiva</option>
+                        </select>
+
                         <div class="invalid-feedback" id="error_parametros_input_nombre">Chequear!</div>
                     </div>
                 </div>

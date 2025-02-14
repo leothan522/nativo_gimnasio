@@ -11,9 +11,11 @@
     const input_nombre = document.querySelector('#input_nombre');
     const input_telefono = document.querySelector('#input_telefono');
     const input_email = document.querySelector('#input_email');
+    const input_direccion = document.querySelector('#input_direccion');
     const input_inscripcion = document.querySelector('#input_inscripcion');
     const input_membresia = document.querySelector('#input_membresia');
     const input_inicio = document.querySelector('#input_inicio');
+    const input_status = document.querySelector('#input_status');
 
 
 
@@ -40,6 +42,7 @@
         const nombre = document.querySelector('#show_nombre');
         const telefono = document.querySelector('#show_telefono');
         const email = document.querySelector('#show_email');
+        const direccion = document.querySelector('#show_direccion');
         const inscripcion = document.querySelector('#show_inscripcion');
         const membresia_nombre = document.querySelector('#show_membresia_nombre');
         const membresia_duracion = document.querySelector('#show_membresia_duracion');
@@ -47,24 +50,27 @@
         const inicio = document.querySelector('#show_inicio');
         const status = document.querySelector('#show_status');
 
-        cedula.textContent = data.cedula;
+        cedula.textContent = data.ver_cedula;
         nombre.textContent = data.nombre;
         telefono.textContent = data.telefono;
         email.textContent = data.email;
+        direccion.textContent = data.direccion;
         inscripcion.textContent = data.ver_inscripcion;
         membresia_nombre.textContent = data.membresia_nombre;
         membresia_duracion.textContent = data.membresia_duracion;
         membresia_precio.textContent = data.membresia_precio;
         inicio.textContent = data.ver_inicio;
-        status.textContent = data.status;
+        status.textContent = data.ver_status;
 
         input_cedula.value = data.cedula;
         input_nombre.value = data.nombre;
         input_telefono.value = data.telefono;
         input_email.value = data.email;
+        input_direccion.value = data.direccion;
         input_inscripcion.value = data.inscripcion;
         input_membresia.value = data.membresia_id;
         input_inicio.value = data.inicio;
+        input_status.value = data.status;
 
         input_rowquid.value = data.rowquid;
         input_opcion.value = "editar";

@@ -82,32 +82,115 @@ class MiembrosController extends Controller
         try {
 
             $rules = [
-                //"nombre" => "required|alpha_numeric_dash",
-                "nombre" => ['required', 'alpha_numeric_dash', 'unique' => Rule::unique('parametros', 'nombre')],
-                "tabla_id" => "required|integer",
-                "valor" => "required"
+                "cedula" => ['required', 'integer', 'unique' => Rule::unique('personas', 'cedula')],
+                "email" => ['required', 'valid_email', 'unique' => Rule::unique('users', 'email')],
+                "nombre" => "required",
+                "telefono" => "required",
+                "direccion" => "required",
+                "inscripcion" => "required",
+                "membresia" => "required",
+                "inicio" => "required",
+                "status" => "required",
             ];
 
             $messages = [
-                "nombre" => ["alpha_numeric_dash" => "alpha_numeric_dash"]
+                //"nombre" => ["alpha_numeric_dash" => "alpha_numeric_dash"]
             ];
 
             $filter = [
-                "nombre" => "trim|sanitize_string|lower_case",
-                "valor" => "trim|sanitize_string"
+                "nombre" => "trim|sanitize_string",
+                "telefono" => "trim|sanitize_string",
+                "email" => "trim|sanitize_email|lower_case",
+                "direccion" => "sanitize_string"
             ];
 
             $this->validate($rules, $messages, $filter);
 
-            $model = new Parametro();
-            $data = array_values($this->VALID_DATA);
-            $data[] = getRowquid($model);
-            $row = $model->save($data);
-            $this->setActualRowquid($row->rowquid);
-            $row->actualRowquid = $this->getActualRowquid();
-            $row->ok = true;
+            $initData = $this->VALID_DATA;
 
-            return $this->json($row);
+            $modelUser = new User();
+            $dataUser = [
+                $initData['nombre'],
+                $initData['email'],
+                password_hash($initData['cedula'], PASSWORD_DEFAULT),
+                getRowquid($modelUser),
+            ];
+            $user = $modelUser->save($dataUser);
+
+            $modelPersona = new Persona();
+            $dataPersona = [
+                $user->id,
+                $initData['nombre'],
+                $initData['cedula'],
+                $initData['telefono'],
+                $initData['direccion'],
+                generarStringAleatorio(16, true),
+                getRowquid($modelPersona),
+            ];
+            $persona = $modelPersona->save($dataPersona);
+
+            $modelMiembro = new Miembro();
+            $dataMiembro = [
+                $persona->id,
+                $initData['inscripcion'],
+                getRowquid($modelMiembro),
+            ];
+            $miembro = $modelMiembro->save($dataMiembro);
+
+            $modelPersonaMembresia = new PersonaMembresia();
+            $dataMembresia = [
+                $persona->id,
+                $initData['membresia'],
+                $initData['inicio'],
+                $initData['status'],
+                getRowquid($modelPersonaMembresia),
+            ];
+            $personaMembresia = $modelPersonaMembresia->save($dataMembresia);
+
+            $modelmembresia = new Membresia();
+            $membresia = $modelmembresia->find($personaMembresia->membresias_id);
+
+            $this->setActualRowquid($miembro->rowquid);
+
+            $status = 0;
+
+            if ($personaMembresia->status == 0){
+                $status = "Pendiente por Pago";
+            }
+
+            if ($personaMembresia->status == 1){
+                $status = "Activa";
+            }
+
+            if ($personaMembresia->status == 2){
+                $status = "Inactiva";
+            }
+
+            $data = [
+                "users_id"=> $user->id,
+                "nombre"=> $persona->nombre,
+                "cedula"=> $persona->cedula,
+                "ver_cedula"=> formatoMillares($persona->cedula, 0),
+                "telefono"=> $persona->telefono,
+                "direccion"=> $persona->direccion,
+                "token"=> $persona->token,
+                "inscripcion"=> $miembro->inscripcion,
+                "ver_inscripcion"=> getFecha($miembro->inscripcion),
+                "rowquid"=> $miembro->rowquid,
+                "email"=> $user->email,
+                "inicio"=> $personaMembresia->fecha,
+                "ver_inicio"=> getFecha($personaMembresia->fecha),
+                "status"=> $personaMembresia->status,
+                "ver_status"=> $status,
+                "membresia_id"=> $personaMembresia->membresias_id,
+                "membresia_nombre"=> $membresia->nombre,
+                "membresia_duracion"=> $membresia->duracion,
+                "membresia_precio"=> $membresia->precio,
+                "ok"=> true,
+                "actualRowquid"=> $this->getActualRowquid()
+            ];
+
+            return $this->json($data);
 
         }catch (\Error|\Exception $e){
             $this->showError('Error en el Controller', $e);
@@ -186,6 +269,7 @@ class MiembrosController extends Controller
                     $myObj->users_id = $persona->users_id;
                     $myObj->nombre = $persona->nombre;
                     $myObj->cedula = $persona->cedula;
+                    $myObj->ver_cedula = formatoMillares($persona->cedula, 0);
                     $myObj->telefono = $persona->telefono;
                     $myObj->direccion = $persona->direccion;
                     $myObj->token = $persona->token;
@@ -202,16 +286,18 @@ class MiembrosController extends Controller
                         $myObj->inicio = $personaMembresia->fecha;
                         $myObj->ver_inicio = getFecha($personaMembresia->fecha);
 
+                        $myObj->status = $personaMembresia->status;
+
                         if ($personaMembresia->status == 0){
-                            $myObj->status = "Esperando Aprobación";
+                            $myObj->ver_status = "Pendiente por Pago";
                         }
 
                         if ($personaMembresia->status == 1){
-                            $myObj->status = "Activa";
+                            $myObj->ver_status = "Activa";
                         }
 
-                        if ($personaMembresia->status == 0){
-                            $myObj->status = "Inactiva";
+                        if ($personaMembresia->status == 2){
+                            $myObj->ver_status = "Inactiva";
                         }
 
                         $membresia = $modelMembreseia->find($idMembresia);
@@ -223,7 +309,9 @@ class MiembrosController extends Controller
 
                     }else{
                         $myObj->inicio = '-';
-                        $myObj->status = '-';
+                        $myObj->ver_inicio = '-';
+                        $myObj->status = '';
+                        $myObj->ver_status = '';
                         $myObj->membresia_id = '';
                         $myObj->membresia_nombre = '-';
                         $myObj->membresia_duracion = '-';
@@ -260,13 +348,13 @@ class MiembrosController extends Controller
         try {
 
             $rowquid = $_POST['rowquid'];
-            $model = new Parametro();
+            $model = new Miembro();
             $parametro = $model->where('rowquid', $rowquid)->first();
             if ($parametro){
-                $data = [
+                /*$data = [
                     'nombre' => "*".$parametro->nombre,
                 ];
-                $model->update($parametro->id, $data);
+                $model->update($parametro->id, $data);*/
                 $model->delete($parametro->id);
                 $data['ok'] = true;
             }else{
