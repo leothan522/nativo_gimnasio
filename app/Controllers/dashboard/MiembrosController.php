@@ -169,14 +169,79 @@ class MiembrosController extends Controller
         try {
 
             $rowquid = $_POST['rowquid'];
-            $model = new Parametro();
+            $model = new Miembro();
+            $modelPersona = new Persona();
+            $modelUser = new User();
+            $modelPersonaMembresia = new PersonaMembresia();
+            $modelMembreseia = new Membresia();
             $parametro = $model->where('rowquid', $rowquid)->first();
             if ($parametro){
-                $parametro->ok = true;
-                $parametro->noToast = true;
-                $data = $parametro;
-                $this->setActualRowquid($parametro->rowquid);
-                $data->actualRowquid = $this->getActualRowquid();
+
+                $miembros = null;
+                $id = $parametro->personas_id;
+                $persona = $modelPersona->find($id);
+                if ($persona){
+
+                    $myObj = new \stdClass();
+                    $myObj->users_id = $persona->users_id;
+                    $myObj->nombre = $persona->nombre;
+                    $myObj->cedula = $persona->cedula;
+                    $myObj->telefono = $persona->telefono;
+                    $myObj->direccion = $persona->direccion;
+                    $myObj->token = $persona->token;
+                    $myObj->inscripcion = $parametro->inscripcion;
+                    $myObj->ver_inscripcion = getFecha($parametro->inscripcion);
+                    $myObj->rowquid = $parametro->rowquid;
+
+                    $user = $modelUser->find($persona->users_id);
+                    $myObj->email = $user->email;
+
+                    $personaMembresia = $modelPersonaMembresia->where('personas_id', $persona->id)->first();
+                    if ($personaMembresia){
+                        $idMembresia = $personaMembresia->membresias_id;
+                        $myObj->inicio = $personaMembresia->fecha;
+                        $myObj->ver_inicio = getFecha($personaMembresia->fecha);
+
+                        if ($personaMembresia->status == 0){
+                            $myObj->status = "Esperando Aprobación";
+                        }
+
+                        if ($personaMembresia->status == 1){
+                            $myObj->status = "Activa";
+                        }
+
+                        if ($personaMembresia->status == 0){
+                            $myObj->status = "Inactiva";
+                        }
+
+                        $membresia = $modelMembreseia->find($idMembresia);
+                        $myObj->membresia_id = $membresia->id;
+                        $myObj->membresia_nombre = $membresia->nombre;
+                        $myObj->membresia_duracion = $membresia->duracion;
+                        $myObj->membresia_precio = $membresia->precio;
+
+
+                    }else{
+                        $myObj->inicio = '-';
+                        $myObj->status = '-';
+                        $myObj->membresia_id = '';
+                        $myObj->membresia_nombre = '-';
+                        $myObj->membresia_duracion = '-';
+                        $myObj->membresia_precio = '-';
+                    }
+                    $miembros = $myObj;
+
+                    $miembros->ok = true;
+                    $miembros->noToast = true;
+                    $data = $miembros;
+                    $this->setActualRowquid($miembros->rowquid);
+                    $data->actualRowquid = $this->getActualRowquid();
+
+                }else{
+                    $data['ok'] = false;
+                    $data['noToast'] = true;
+                    $data['actualRowquid'] = null;
+                }
             }else{
                 $data['ok'] = false;
                 $data['noToast'] = true;
@@ -247,6 +312,8 @@ class MiembrosController extends Controller
 
         $model = new Miembro();
         $modelPersona = new Persona();
+        $modelMembresia = new Membresia();
+        $membresias = $modelMembresia->all();
 
         $totalRows = $model->where('id', '!=', 0)->count();
 
@@ -285,6 +352,7 @@ class MiembrosController extends Controller
             "limit" => $this->limitRows,
             "btnDisabled" => $this->btnDisabled,
             "listarRegistros" => $miembros,
+            "listarMembresias" => $membresias,
         ];
         return $data;
     }

@@ -7,9 +7,13 @@
     const input_opcion = document.querySelector('#input_opcion');
 
 
+    const input_cedula = document.querySelector('#input_cedula');
     const input_nombre = document.querySelector('#input_nombre');
-    const input_tabla_id = document.querySelector('#input_tabla_id');
-    const input_valor = document.querySelector('#input_valor');
+    const input_telefono = document.querySelector('#input_telefono');
+    const input_email = document.querySelector('#input_email');
+    const input_inscripcion = document.querySelector('#input_inscripcion');
+    const input_membresia = document.querySelector('#input_membresia');
+    const input_inicio = document.querySelector('#input_inicio');
 
 
 
@@ -32,15 +36,36 @@
     }
 
     function initShow(data) {
+        const cedula = document.querySelector('#show_cedula');
         const nombre = document.querySelector('#show_nombre');
-        const tabla_id = document.querySelector('#show_tabla_id');
-        const valor = document.querySelector('#show_valor');
-        input_nombre.value = data.nombre;
-        input_tabla_id.value = data.tabla_id;
-        input_valor.value = data.valor;
+        const telefono = document.querySelector('#show_telefono');
+        const email = document.querySelector('#show_email');
+        const inscripcion = document.querySelector('#show_inscripcion');
+        const membresia_nombre = document.querySelector('#show_membresia_nombre');
+        const membresia_duracion = document.querySelector('#show_membresia_duracion');
+        const membresia_precio = document.querySelector('#show_membresia_precio');
+        const inicio = document.querySelector('#show_inicio');
+        const status = document.querySelector('#show_status');
+
+        cedula.textContent = data.cedula;
         nombre.textContent = data.nombre;
-        tabla_id.textContent = data.tabla_id;
-        valor.textContent = data.valor;
+        telefono.textContent = data.telefono;
+        email.textContent = data.email;
+        inscripcion.textContent = data.ver_inscripcion;
+        membresia_nombre.textContent = data.membresia_nombre;
+        membresia_duracion.textContent = data.membresia_duracion;
+        membresia_precio.textContent = data.membresia_precio;
+        inicio.textContent = data.ver_inicio;
+        status.textContent = data.status;
+
+        input_cedula.value = data.cedula;
+        input_nombre.value = data.nombre;
+        input_telefono.value = data.telefono;
+        input_email.value = data.email;
+        input_inscripcion.value = data.inscripcion;
+        input_membresia.value = data.membresia_id;
+        input_inicio.value = data.inicio;
+
         input_rowquid.value = data.rowquid;
         input_opcion.value = "editar";
         card_show.classList.remove('d-none');
