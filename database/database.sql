@@ -27,6 +27,7 @@ CREATE TABLE IF NOT EXISTS `cargos` (
   `moneda` varchar(50) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -41,6 +42,7 @@ CREATE TABLE IF NOT EXISTS `empleados` (
   `fecha` date NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -54,6 +56,7 @@ CREATE TABLE IF NOT EXISTS `horarios` (
   `nombre` varchar(50) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -63,10 +66,12 @@ CREATE TABLE IF NOT EXISTS `horarios` (
 CREATE TABLE IF NOT EXISTS `membresias` (
   `id` int unsigned NOT NULL AUTO_INCREMENT,
   `nombre` varchar(50) NOT NULL,
-  `duracion` int NOT NULL,
-  `precio` decimal(20,6) NOT NULL,
+  `duracion` varchar(50) NOT NULL DEFAULT '',
+  `precio` varchar(50) NOT NULL DEFAULT '',
+  `status` int NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -79,6 +84,7 @@ CREATE TABLE IF NOT EXISTS `miembros` (
   `inscripcion` date NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -92,6 +98,7 @@ CREATE TABLE IF NOT EXISTS `notificaciones` (
   `users_id` int NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -123,6 +130,7 @@ CREATE TABLE IF NOT EXISTS `personas` (
   `token` text NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -136,6 +144,7 @@ CREATE TABLE IF NOT EXISTS `personas_membresias` (
   `fecha` date NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -154,14 +163,9 @@ CREATE TABLE IF NOT EXISTS `sessions` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `sessions_user_id_index` (`users_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto_gimnasio.sessions: ~5 rows (aproximadamente)
-INSERT INTO `sessions` (`id`, `users_id`, `ip_address`, `user_agent`, `user_client`, `user_os`, `rowquid`, `created_at`, `updated_at`) VALUES
-	(1, 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36 Edg/133.0.0.0', '{"type":"browser","name":"Microsoft Edge","short_name":"PS","version":"133.0","engine":"Blink","engine_version":"133.0.0.0","family":"Internet Explorer"}', '{"name":"Windows","short_name":"WIN","version":"10","platform":"x64","family":"Windows"}', 'NCPdPzOCsh85vr2w', '2025-02-12 20:07:58', '2025-02-12 20:08:25'),
-	(2, 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36 Edg/133.0.0.0', '{"type":"browser","name":"Microsoft Edge","short_name":"PS","version":"133.0","engine":"Blink","engine_version":"133.0.0.0","family":"Internet Explorer"}', '{"name":"Windows","short_name":"WIN","version":"10","platform":"x64","family":"Windows"}', 'mBTGDtr2lkpZT4NW', '2025-02-12 20:08:48', '2025-02-12 20:08:55'),
-	(3, 3, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36 Edg/133.0.0.0', '{"type":"browser","name":"Microsoft Edge","short_name":"PS","version":"133.0","engine":"Blink","engine_version":"133.0.0.0","family":"Internet Explorer"}', '{"name":"Windows","short_name":"WIN","version":"10","platform":"x64","family":"Windows"}', 'MjcVvBXUIKx8kVTk', '2025-02-12 20:09:35', '2025-02-12 20:09:43'),
-	(4, 3, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36 Edg/133.0.0.0', '{"type":"browser","name":"Microsoft Edge","short_name":"PS","version":"133.0","engine":"Blink","engine_version":"133.0.0.0","family":"Internet Explorer"}', '{"name":"Windows","short_name":"WIN","version":"10","platform":"x64","family":"Windows"}', 'ozEtGgSnDBmuEBwV', '2025-02-12 20:10:46', '2025-02-12 20:17:51');
+-- Volcando datos para la tabla proyecto_gimnasio.sessions: ~0 rows (aproximadamente)
 
 -- Volcando estructura para tabla proyecto_gimnasio.users
 CREATE TABLE IF NOT EXISTS `users` (
