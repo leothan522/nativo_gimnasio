@@ -38,7 +38,7 @@
         <table class="table table-sm table-hover table-head-fixed">
             <thead class="table-light">
             <tr>
-                <th class="text-uppercase text-primary-emphasis me-2" style="width: 10%">Cédula</th>
+                <th class="text-uppercase text-primary-emphasis me-2 text-end" style="width: 10%">Cédula</th>
                 <th class="text-uppercase text-primary-emphasis">Nombre</th>
                 <th class="text-center text-primary-emphasis" style="width: 10%"><small class="text-nowrap">Rows <?= $limitRows ?></small></th>
             </tr>
@@ -58,7 +58,7 @@
 
                 ?>
                     <tr class="align-middle <?= $clase ?>">
-                        <td class="text-uppercase me-2"><?= $row->cedula ?></td>
+                        <td class="text-end text-uppercase me-2"><?= formatoMillares($row->cedula, 0) ?></td>
                         <td class="text-uppercase text-truncate" style="max-width: 150px"><?= $row->nombre ?></td>
                         <td class="">
                             <div class="btn-toolbar justify-content-center" role="toolbar" aria-label="Toolbar with button groups">

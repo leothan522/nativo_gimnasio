@@ -7,6 +7,7 @@ use app\Middlewares\Middleware;
 use app\Models\Miembro;
 use app\Models\Parametro;
 use app\Models\Persona;
+use app\Models\User;
 use app\Providers\Rule;
 use app\Traits\CardView;
 
@@ -260,7 +261,7 @@ class MiembrosController extends Controller
                     $myObj = new \stdClass();
                     $myObj->cedula = $persona->cedula;
                     $myObj->nombre = $persona->nombre;
-                    $myObj->rowquid = $persona->rowquid;
+                    $myObj->rowquid = $parametro->rowquid;
                     $miembros[] = $myObj;
                 }
             }
@@ -289,9 +290,31 @@ class MiembrosController extends Controller
     protected function lastRegistro()
     {
         $model = new Miembro();
+        $modelPersona = new Persona();
+        $modelUser = new User();
         $parametro = $model->orderBy('created_at', 'DESC')->where('id', '!=', 0)->first();
         if ($parametro){
-            return $parametro;
+            $miembros = null;
+            $id = $parametro->personas_id;
+            $persona = $modelPersona->find($id);
+            if ($persona){
+
+                $myObj = new \stdClass();
+                $myObj->users_id = $persona->users_id;
+                $myObj->nombre = $persona->nombre;
+                $myObj->cedula = $persona->cedula;
+                $myObj->telefono = $persona->telefono;
+                $myObj->direccion = $persona->direccion;
+                $myObj->token = $persona->token;
+                $myObj->inscripcion = $parametro->inscripcion;
+                $myObj->rowquid = $parametro->rowquid;
+
+                $user = $modelUser->find($persona->users_id);
+                $myObj->email = $user->email;
+
+                $miembros = $myObj;
+            }
+            return $miembros;
         }else{
             return null;
         }
