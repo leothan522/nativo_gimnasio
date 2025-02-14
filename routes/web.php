@@ -2,6 +2,7 @@
 
 use app\Controllers\dashboard\MiembrosController;
 use app\Controllers\dashboard\ParametrosController;
+use app\Controllers\dashboard\UsuariosController;
 use app\Controllers\test\TestController;
 use app\Controllers\web\AuthController;
 use app\Controllers\web\GuestController;
@@ -83,6 +84,15 @@ Route::post('miembros/edit', [MiembrosController::class, 'update']);
 Route::post('miembros/show', [MiembrosController::class, 'show']);
 Route::post('miembros/destroy', [MiembrosController::class, 'destroy']);
 Route::post('miembros/search', [MiembrosController::class, 'search']);
+
+Route::get('usuarios', [UsuariosController::class, 'index']);
+Route::post('usuarios', [UsuariosController::class, 'save']);
+Route::post('usuarios/limit', [UsuariosController::class, 'limit']);
+Route::post('usuarios/refresh', [UsuariosController::class, 'refresh']);
+Route::post('usuarios/edit', [UsuariosController::class, 'update']);
+Route::post('usuarios/show', [UsuariosController::class, 'show']);
+Route::post('usuarios/destroy', [UsuariosController::class, 'destroy']);
+Route::post('usuarios/search', [UsuariosController::class, 'search']);
 
 
 //WEB **********************************************************************************************
