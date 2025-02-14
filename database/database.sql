@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `membresias` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Volcando datos para la tabla proyecto_gimnasio.membresias: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto_gimnasio.membresias: ~3 rows (aproximadamente)
 INSERT INTO `membresias` (`id`, `nombre`, `duracion`, `precio`, `rowquid`, `created_at`, `updated_at`, `deleted_at`) VALUES
 	(1, 'Bronce', '1 mes', '12 USD', 'ytsnghyrtosdgtyu', '2025-02-14 07:51:42', NULL, NULL),
 	(2, 'Plata', '3 mese', '30 USD', 'awsnbyudfqpljhyr', '2025-02-14 07:53:50', NULL, NULL),
@@ -143,7 +143,7 @@ CREATE TABLE IF NOT EXISTS `personas` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Volcando datos para la tabla proyecto_gimnasio.personas: ~0 rows (aproximadamente)
 

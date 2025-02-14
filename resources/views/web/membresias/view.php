@@ -8,7 +8,7 @@
     <meta name="author" content="Yonathan Castillo and Bootstrap contributors">
     <meta name="generator" content="leothan 0.1">
 
-    <title><?= env('app_name', 'Inicio') ?> | Perfil </title>
+    <title><?= env('app_name', 'Inicio') ?> | Membresía </title>
 
     <link rel="apple-touch-icon" sizes="57x57" href="<?php asset('favicon/apple-icon-57x57.png'); ?>">
     <link rel="apple-touch-icon" sizes="60x60" href="<?php asset('favicon/apple-icon-60x60.png'); ?>">
