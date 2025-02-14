@@ -8,13 +8,13 @@ use app\Models\Parametro;
 use app\Providers\Rule;
 use app\Traits\CardView;
 
-class ParametrosController extends Controller
+class MiembrosController extends Controller
 {
     use CardView;
 
     public function __construct()
     {
-        $this->setMODULO("parametros");
+        $this->setMODULO("miembros");
     }
 
     function index()
@@ -22,12 +22,11 @@ class ParametrosController extends Controller
         try {
             Middleware::auth('/');
             $data = $this->initData();
-            $data['title'] = "Parametros";
 
             if ($data['totalRows'] > 0){
                 $data['ocultarShow'] = false;
                 $data['ocultarForm'] = true;
-
+                $data['title'] = "Editar Parametro";
                 $row = $this->lastRegistro();
                 $data['lastRegistro'] = $row;
                 $this->setActualRowquid($row->rowquid);
@@ -35,6 +34,7 @@ class ParametrosController extends Controller
             }else{
                 $data['ocultarShow'] = true;
                 $data['ocultarForm'] = false;
+                $data['title'] = "Crear Parametro";
                 $data['lastRegistro'] = null;
                 $data['actualRowquid'] = null;
             }
@@ -273,5 +273,4 @@ class ParametrosController extends Controller
             return null;
         }
     }
-
 }
