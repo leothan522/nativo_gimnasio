@@ -10,7 +10,7 @@ class Miembro extends Model
     protected array $fillable = [
         'personas_id',
         'inscripcion',
-        'created_at',
+        'rowquid',
     ];
 
 }

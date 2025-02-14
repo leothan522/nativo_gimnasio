@@ -6,6 +6,7 @@ use app\Controllers\Controller;
 use app\Middlewares\Middleware;
 use app\Models\Miembro;
 use app\Models\Parametro;
+use app\Models\Persona;
 use app\Providers\Rule;
 use app\Traits\CardView;
 
@@ -239,16 +240,34 @@ class MiembrosController extends Controller
         }else{
             $this->setLimit($limit);
         }
+
         $model = new Miembro();
+        $modelPersona = new Persona();
+
         $totalRows = $model->where('id', '!=', 0)->count();
 
         if (empty($keyword)){
             $parametros = $model->limit($this->limitRows)->orderBy('created_at', 'DESC')->all();
             $limitRows = $model->limit($this->limitRows)->count();
+
+            $miembros[] = new \stdClass();
+            $i = 0;
+            foreach ($parametros as $parametro){
+                $id = $parametro->personas_id;
+                $persona = $modelPersona->find($id);
+                if ($persona){
+                    $miembros[$i]->cedula = $persona->cedula;
+                    $miembros[$i]->nombre = $persona->nombre;
+                    $miembros[$i]->rowquid = $persona->id;
+                }
+                $i++;
+            }
+
         }else{
             $sql = "SELECT * FROM `miembros` WHERE deleted_at IS NULL AND `personas_id` LIKE '%$keyword%' OR `id` LIKE '%$keyword%' ORDER BY `created_at` DESC LIMIT 100;";
             $parametros = $model->query($sql)->get();
             $limitRows = $model->query($sql)->count();
+            $miembros = null;
         }
 
         $this->btnVerMas($limitRows, $totalRows);
@@ -259,7 +278,7 @@ class MiembrosController extends Controller
             "limitRows" => $limitRows,
             "limit" => $this->limitRows,
             "btnDisabled" => $this->btnDisabled,
-            "listarRegistros" => $parametros,
+            "listarRegistros" => $miembros,
         ];
         return $data;
     }

@@ -11,6 +11,6 @@ class Cargo extends Model
         'cargo',
         'sueldo',
         'moneda',
-        'created_at',
+        'rowquid',
     ];
 }

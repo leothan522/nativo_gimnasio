@@ -10,7 +10,8 @@ class Membresia extends Model
         'nombre',
         'duracion',
         'precio',
-        'created_at',
+        'status',
+        'rowquid',
     ];
 
 }

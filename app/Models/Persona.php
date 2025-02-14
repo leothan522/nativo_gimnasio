@@ -2,7 +2,7 @@
 
 namespace app\Models;
 
-class Personas extends Model
+class Persona extends Model
 {
     protected bool $softDelete = true;
     protected string $table = "personas";
@@ -14,7 +14,7 @@ class Personas extends Model
         'telefono',
         'direccion',
         'token',
-        'created_at',
+        'rowquid',
     ];
 
 }

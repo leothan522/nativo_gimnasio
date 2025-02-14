@@ -11,6 +11,6 @@ class Empleado extends Model
         'cargos_id',
         'horarios_id',
         'fecha',
-        'created_at'
+        'rowquid'
     ];
 }

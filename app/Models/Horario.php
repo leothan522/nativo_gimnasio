@@ -11,6 +11,6 @@ class Horario extends Model
         'dias',
         'horas',
         'nombre',
-        'created_at',
+        'rowquid',
     ];
 }

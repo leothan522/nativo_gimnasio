@@ -11,6 +11,6 @@ class Notificacion extends Model
         'asunto',
         'mensaje',
         'users_id',
-        'created_at',
+        'rowquid',
     ];
 }
