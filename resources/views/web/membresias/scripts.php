@@ -1,5 +1,7 @@
 <script type="application/javascript">
+
     const form = document.querySelector('#form_membresias');
+    const show_plan = document.querySelector('#show_plan');
 
     const select_membresia = document.querySelector('#select_membresias');
     const error_select = document.querySelector('#error_select');
@@ -13,6 +15,7 @@
     const error_direccion = document.querySelector('#error_membresias_input_direccion');
 
 
+
     form.addEventListener("submit", event => {
         event.preventDefault();
         event.stopPropagation();
@@ -22,7 +25,9 @@
             verCargando('div_card_form_body');
             let url = '<?= route('membresia') ?>';
             ajaxRequest({ url: url, form: form }, function (data) {
-
+                if (data.ok){
+                    location.reload();
+                }
             });
         }
     });

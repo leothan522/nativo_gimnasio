@@ -95,14 +95,16 @@ class WebController extends Controller
             $modelUsers = new User();
 
             $rules = [
+                'membresia' => 'required',
+                'inicio' => 'required',
+                'nombre' => 'required|valid_name|max_len,50|min_len,3',
                 'cedula' => ['required', 'integer', 'unique' => Rule::unique('personas', 'cedula')],
-                'name' => 'required|valid_name|max_len,50|min_len,3',
                 'telefono' => 'required',
                 'direccion' => 'required',
             ];
 
             $messages = [
-                'name' => [
+                'nombre' => [
                     'required' => 'El campo nombre es requerido.',
                     'valid_name' => 'El campo nombre debe contener un nombre humano válido.',
                     'max_len' => 'El campo nombre no puede tener más de 50 caracteres de longitud.',
@@ -118,39 +120,63 @@ class WebController extends Controller
                 'direccion' => [
                     'required' => 'El campo dirección es requerido.'
                 ]
-
-
             ];
 
             $filter = [
-                'name' => 'trim',
+                'nombre' => 'trim',
                 'email' => 'sanitize_email'
             ];
 
-            $user = $modelUsers->where('id', Auth::user()->id)->first();
-
-
             $this->validate($rules, $messages, $filter);
-            $data = array_values($this->VALID_DATA);
+
+            $initData = $this->VALID_DATA;
+
+            $modelPersona = new Persona();
+            $dataPersona = [
+                Auth::user()->id,
+                $initData['nombre'],
+                $initData['cedula'],
+                $initData['telefono'],
+                $initData['direccion'],
+                generarStringAleatorio(16, true),
+                getRowquid($modelPersona),
+            ];
+            $persona = $modelPersona->save($dataPersona);
+
+            $modelMiembro = new Miembro();
+            $dataMiembro = [
+                $persona->id,
+                getFecha(),
+                getRowquid($modelMiembro),
+            ];
+            $miembro = $modelMiembro->save($dataMiembro);
+
+            $modelPersonaMembresia = new PersonaMembresia();
+            $dataMembresia = [
+                $persona->id,
+                $initData['membresia'],
+                $initData['inicio'],
+                0,
+                getRowquid($modelPersonaMembresia),
+            ];
+            $personaMembresia = $modelPersonaMembresia->save($dataMembresia);
+
+            $modelmembresia = new Membresia();
+            $membresia = $modelmembresia->find($personaMembresia->membresias_id);
 
             $data = [
-                'users_id' => $user->id,
-                'nombre' => $this->VALID_DATA['name'],
-                'cedula' => $this->VALID_DATA['cedula'],
-                'telefono' => $this->VALID_DATA['telefono'],
-                'direccion' => $this->VALID_DATA['direccion'],
-                'token' => generarStringAleatorio(16, true),
-                'rowquid' => getRowquid($model)
+                'modulo' => 'membresia',
+                'miembro' => true,
+                'inscripcion' => $miembro->inscripcion,
+                'membresia' => $membresia->nombre,
+                'duracion' => $membresia->duracion,
+                'precio' => $membresia->precio,
+                'inicio' => $personaMembresia->fecha,
+                'estatus' => $personaMembresia->status,
+                'ok' => true
             ];
 
-            $row = $model->save($data);
-
-            if ($row) {
-                $row->ok = true;
-            }
-
-
-            return $this->json($row);
+            return $this->json($data);
 
         } catch (\Error|\Exception $e) {
             $this->showError('Error en el Controller', $e);

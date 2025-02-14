@@ -1,6 +1,6 @@
 <div class="row justify-content-center p-3">
 
-    <div class="col-sm-12 col-md-7 <?php if (!$miembro){ echo 'd-none'; } ?>">
+    <div class="col-sm-12 col-md-7 <?php if (!$miembro){ echo 'd-none'; } ?>" id="show_plan">
         <div class="card">
             <div class="card-body">
                 <div class="row g-0">
@@ -12,22 +12,22 @@
                             <h4 class="card-title">Detalles de tu Plan Actual </h4>
                             <ul class="list-group">
                                 <li class="list-group-item border-0 d-flex justify-content-between align-items-center">
-                                    <strong>Inscripción:</strong> <span id="text_user_name" class="text-uppercase"><?= getFecha($inscripcion) ?></span>
+                                    <strong>Inscripción:</strong> <span id="text_inscripcion" class="text-uppercase"><?= getFecha($inscripcion) ?></span>
                                 </li>
                                 <li class="list-group-item border-0 d-flex justify-content-between align-items-center">
-                                    <strong>Membresía:</strong> <span id="text_user_name" class="text-uppercase"><?= $membresia ?></span>
+                                    <strong>Membresía:</strong> <span id="text_membresia" class="text-uppercase"><?= $membresia ?></span>
                                 </li>
                                 <li class="list-group-item border-0 d-flex justify-content-between align-items-center">
-                                    <strong>Duración:</strong> <span id="text_user_email" class=""><?= $duracion ?></span>
+                                    <strong>Duración:</strong> <span id="text_duracion" class=""><?= $duracion ?></span>
                                 </li>
                                 <li class="list-group-item border-0 d-flex justify-content-between align-items-center">
-                                    <strong>Precio:</strong> <span id="text_user_email" class=""><?= $precio ?></span>
+                                    <strong>Precio:</strong> <span id="text_precio" class=""><?= $precio ?></span>
                                 </li>
                                 <li class="list-group-item border-0 d-flex justify-content-between align-items-center">
-                                    <strong>Inicio:</strong> <span id="text_user_email" class=""><?= getFecha($inicio) ?></span>
+                                    <strong>Inicio:</strong> <span id="text_inicio" class=""><?= getFecha($inicio) ?></span>
                                 </li>
                                 <li class="list-group-item border-0 d-flex justify-content-between align-items-center">
-                                    <strong>Estatus:</strong> <span class=""><?= $estatus ?></span>
+                                    <strong>Estatus:</strong> <span id="text_estatus" class=""><?= $estatus ?></span>
                                 </li>
                             </ul>
                         </div>
