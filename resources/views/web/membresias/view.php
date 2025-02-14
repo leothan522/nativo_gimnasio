@@ -59,11 +59,11 @@
     <!-- Spinner End -->
 
     <!--header-->
-    <?php include view_path('web.profile.header'); ?>
+    <?php include view_path('web.membresias.header'); ?>
 
 
     <!-- content -->
-    <?php include view_path('web.profile.content'); ?>
+    <?php include view_path('web.membresias.content'); ?>
     <!-- content End -->
 
 
@@ -104,7 +104,7 @@
     <script src="<?php asset('vendor/finanza/js/app.js', true); ?>"></script>
     <script src="<?php asset('vendor/finanza/js/toastBootstrap.js', true); ?>"></script>
 
-    <?php include view_path('web.profile.scripts')?>"
+    <?php include view_path('web.membresias.scripts')?>"
 </body>
 
 </html>

@@ -4,6 +4,7 @@ namespace app\Controllers\web;
 
 use app\Controllers\Controller;
 use app\Middlewares\Middleware;
+use app\Models\Membresia;
 use app\Models\Persona;
 use app\Providers\Auth;
 
@@ -26,11 +27,19 @@ class WebController extends Controller
 
     public function membresia()
     {
+        Middleware::auth('/');
         $model = new Persona();
-        $existe = $model->where('')
-        $data = [
-            'modulo' => 'inicio'
+        $id = Auth::user()->id;
+        $persona = $model->where('users_id', $id)->first();
+        if (!empty($persona)) {
+            $existe = 'registrado';
+        }else{
+            $existe = 'no_registrado';
+        }
 
+        $data = [
+            'modulo' => 'membresia',
+            'persona' => $existe
         ];
         return $this->view('web.membresias.view', $data);
     }
