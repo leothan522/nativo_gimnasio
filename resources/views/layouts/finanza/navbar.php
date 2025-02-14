@@ -11,7 +11,7 @@
             <a href="<?= route('web'); ?>" class="nav-item nav-link <?php if ($modulo == 'inicio'){ echo 'active'; } ?>">Inicio</a>
             <a href="<?= route('membresia'); ?>" class="nav-item nav-link <?php if ($modulo == 'membresia'){ echo 'active'; } ?>">Membresía</a>
             <!--<a href="service.html" class="nav-item nav-link">Services</a>-->
-            <a href="contact.html" class="nav-item nav-link">Contáctanos</a>
+            <a href="#" class="nav-item nav-link">Contáctanos</a>
             <!--<div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
                 <div class="dropdown-menu border-light m-0">

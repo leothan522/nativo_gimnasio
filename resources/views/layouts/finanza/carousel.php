@@ -11,7 +11,7 @@
                                 ¡Bienvenido!</p>
                             <h3 class="display-1 mb-3 animated slideInDown">Desafía tus Límites</h3>
                             <h5 class="text-dark">Rompe barreras y supera tus límites. ¡En nuestro gimnasio, cada día es una nueva oportunidad para ser más fuerte!</h5>
-                            <a href="" class="btn btn-primary py-3 px-5 animated slideInDown">Explore More</a>
+                            <a href="<?= route('membresia'); ?>" class="btn btn-primary py-3 px-5 animated slideInDown">Explorar Mas</a>
                         </div>
                     </div>
                 </div>
@@ -28,7 +28,7 @@
                                 ¡Bienvenido!</p>
                             <h3 class="display-1 mb-3 animated slideInDown">Tu Mejor Versión</h3>
                             <h5 class="text-dark">Transforma tu cuerpo, fortalece tu mente y conquista tus metas. ¡Tu mejor versión empieza aquí!</h5>
-                            <a href="" class="btn btn-primary py-3 px-5 animated slideInDown">Explore More</a>
+                            <a href="<?= route('membresia'); ?>" class="btn btn-primary py-3 px-5 animated slideInDown">Explorar Mas</a>
                         </div>
                     </div>
                 </div>
